@@ -5,7 +5,7 @@ import { Button } from "./components/ui/button";
 function App() {
   return (
     <div>
-      <Button>Salut</Button>
+      <Button className="bg-MainPink">Salut</Button>
     </div>
   );
 }
