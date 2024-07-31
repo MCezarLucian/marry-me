@@ -1,12 +1,11 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./components/navbar/Navbar";
-import { users } from "./mockdata/data";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
     <div>
-      <Navbar admin={true} logged={true} user={users[0]} />
+      <Footer />
     </div>
   );
 }
