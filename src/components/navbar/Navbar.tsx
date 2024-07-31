@@ -4,18 +4,24 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { UserType } from "@/lib/types";
 
 interface NavbarProps {
-  logged?: boolean;
-  admin?: boolean;
-  user?: UserType;
+  logged?: boolean; //verify if an user is logged
+  admin?: boolean; //verify if the user is an admin
+  user?: UserType; //user data
 }
 
 function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
   if (admin) {
     return (
       <div className="flex flex-row gap-4 pr-4 justify-center items-center">
-        <p>Home</p>
-        <p>Requests</p>
-        <p>Users</p>
+        <a className="hover:text-MainPink" href="/">
+          Home
+        </a>
+        <a className="hover:text-MainPink" href="/requests">
+          Requests
+        </a>
+        <a className="hover:text-MainPink" href="/users">
+          Users
+        </a>
         <p>
           {user?.firstName} {user?.lastName}
         </p>
@@ -28,10 +34,18 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
   } else {
     return (
       <div className="flex flex-row gap-4 pr-4 justify-center items-center">
-        <p>Home</p>
-        <p>My Profile</p>
-        <p>Contact Us</p>
-        <p>Full Name</p>
+        <a className="hover:text-MainPink" href="/">
+          Home
+        </a>
+        <a className="hover:text-MainPink" href="/myProfile">
+          My Profile
+        </a>
+        <a className="hover:text-MainPink" href="/contactUs">
+          Contact Us
+        </a>
+        <a className="hover:text-MainPink" href="/myProfile">
+          {user?.firstName} {user?.lastName}
+        </a>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
