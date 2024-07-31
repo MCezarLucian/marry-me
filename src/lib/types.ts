@@ -10,4 +10,6 @@ export type UserType = {
   description: string;
   attributes: string[];
   soulmateAttributes: string[];
+  imageUrls: string[];
+  profilePicture: string;
 };
