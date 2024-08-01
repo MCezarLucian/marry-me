@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        bgGray: "#A1A7C4",
         NeonBlue: "#01F5F5",
         MainBlue: "#1E5EFF",
         MainPink: "#F500F5",
