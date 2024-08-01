@@ -2,9 +2,9 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import { users } from "./mockdata/data";
+import Navbar from "./components/navbar/Navbar";
+import { users } from "./mockdata/data"
 import UserTypeComponent from "./components/usertypecomponent/UserTypeComponent";
-
 function App() {
   return (
     <div className="h-full w-[60%]">
