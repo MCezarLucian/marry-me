@@ -2,8 +2,7 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
-import { users } from "./mockdata/data"
+import { users } from "./mockdata/data";
 import UserTypeComponent from "./components/usertypecomponent/UserTypeComponent";
 function App() {
   return (
