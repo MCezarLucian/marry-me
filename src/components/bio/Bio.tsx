@@ -71,7 +71,7 @@ const Bio = ({ user }: BioProps) => {
         <div className="text-textColorSecondary text-xl font-medium flex flex-col w-full mb-6">
           <label>My Description</label>
           <textarea
-            className="mt-2 mb-3 text-base text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
+            className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
             placeholder="My Description"
             readOnly
           >
@@ -81,7 +81,7 @@ const Bio = ({ user }: BioProps) => {
         <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
           <label>My Attributes</label>
           <textarea
-            className="mt-2 mb-3 text-base text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
+            className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
             placeholder="My Attributes"
             readOnly
           >
@@ -91,7 +91,7 @@ const Bio = ({ user }: BioProps) => {
         <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
           <label>Attributes for Soulmate</label>
           <textarea
-            className="mt-2 mb-3 text-base text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
+            className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2  h-32 resize-none focus:border-lightGray focus:outline-none"
             placeholder="Attributes for Soulmate"
             readOnly
           >
