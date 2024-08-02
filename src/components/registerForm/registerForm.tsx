@@ -8,7 +8,7 @@ import RegisterStepTwo from "./registerStepTwo";
 import RegisterStepThree from "./registerStepThree";
 import RegisterStepFour from "./registerStepFour";
 import RegisterStepFive from "./registerStepFive";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const RegisterForm = () => {
   const [formState, setFormState] = useState(1);
@@ -42,8 +42,49 @@ const RegisterForm = () => {
       attributes: values.attributes.split(","),
       soulmateAttributes: values.soulmateAttributes.split(","),
     };
+
     console.log(formData);
   }
+
+  useEffect(() => {
+    const firstErrorField = Object.keys(form.formState.errors)[0];
+    errorState(firstErrorField);
+    function errorState(field: string) {
+      if (field && form.formState.isSubmitted) {
+        switch (field) {
+          case "firstName":
+            setFormState(1);
+            break;
+          case "lastName":
+            setFormState(1);
+            break;
+          case "email":
+            setFormState(1);
+            break;
+          case "phoneNumber":
+            setFormState(2);
+            break;
+          case "gender":
+            setFormState(2);
+            break;
+          case "birthdayDate":
+            setFormState(2);
+            break;
+          case "description":
+            setFormState(3);
+            break;
+          case "attributes":
+            setFormState(4);
+            break;
+          case "soulmateAttributes":
+            setFormState(5);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }, [form.formState.errors, form.formState.isSubmitted]);
 
   return (
     <Form {...form}>
