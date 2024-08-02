@@ -1,4 +1,4 @@
-import { UserType } from "../lib/types";
+import { MessageType, UserType } from "../lib/types";
 
 export const users: UserType[] = [
   {
@@ -20,5 +20,29 @@ export const users: UserType[] = [
     ],
     profilePicture:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR02ArPIOrwQDvzDoXHcho4hRHt5KGT8G1rEw&s",
+  },
+];
+
+export const messages: MessageType[] = [
+  {
+    id: 1,
+    senderId: 1,
+    receiverId: 2,
+    content: "Salutare, Boss!",
+    timestamp: new Date(),
+  },
+  {
+    id: 2,
+    senderId: 5,
+    receiverId: 1,
+    content: "Un mesaj!",
+    timestamp: new Date(),
+  },
+  {
+    id: 2,
+    senderId: 3,
+    receiverId: 2,
+    content: "Un mesaj!",
+    timestamp: new Date(),
   },
 ];
