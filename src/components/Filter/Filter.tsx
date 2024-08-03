@@ -6,6 +6,8 @@ interface FilterProps {
   onFilter: (filteredUsers: UserType[]) => void;
 }
 
+//todo: search down
+
 const Filter = ({ users, onFilter }: FilterProps) => {
   const [name, setName] = useState<string>("");
   const [attributes, setAttributes] = useState<string>("");
@@ -46,9 +48,6 @@ const Filter = ({ users, onFilter }: FilterProps) => {
           placeholder="Search Attributs..."
         />
       </div>
-      <button className="bg-gradient-to-r from-customStart to-customEnd text-white font-bold py-2 px-4 rounded  mb-6">
-        Search
-      </button>
       <div className="flex flex-col mt-4 mb-4 w-full">
         <label className="block text-gray-700 text-sm font-bold mb-5">
           Gender
@@ -95,6 +94,9 @@ const Filter = ({ users, onFilter }: FilterProps) => {
           ))}
         </div>
       </div>
+      <button className="bg-gradient-to-r from-customStart to-customEnd text-white font-bold py-2 px-4 rounded  mb-6">
+        Search
+      </button>
     </div>
   );
 };

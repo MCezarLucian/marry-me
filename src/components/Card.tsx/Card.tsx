@@ -14,10 +14,10 @@ const Card = ({ user }: CardProps) => {
         className="flex flex-row
        text-xl gap-1 font-medium tracking-tight text-gray-900 sm:text-5xl"
       >
-        <Star className="text-darkGray fill-darkGray" />
-        <Star className="text-darkGray fill-darkGray" />
-        <Star className="text-darkGray fill-darkGray" />
-        <Star className="text-darkGray fill-darkGray" />
+        <Star className="text-darkGray fill-yellow-500" />
+        <Star className="text-darkGray fill-yellow-500" />
+        <Star className="text-darkGray fill-yellow-500" />
+        <Star className="text-darkGray fill-yellow-500" />
         <Star className="text-darkGray fill-darkGray" />
       </div>
       <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
