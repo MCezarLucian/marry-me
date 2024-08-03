@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { UserType } from "@/lib/types";
 
-/* interface BioProps {
+interface ModalDeleteProps {
   user: UserType; //user data
-} */
+}
 
 const ModalDelete = () => {
   return (

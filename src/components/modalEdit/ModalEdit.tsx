@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import { UserType } from "@/lib/types";
-import { Input } from "../ui/input";
 
 interface ModalEditProps {
   user: UserType;
+  /*   onSave: (updatedUser: UserType) => void;*/
 }
 
-const ModalEdit = ({ user }: ModalEditProps) => {
-  const [formData, setFormData] = useState<UserType>(user);
+const ModalEdit = ({ user /* onSave */ }: ModalEditProps) => {
+  const [formData, setFormData] = useState<UserType>({
+    ...user,
+    birthdayDate: new Date(user.birthdayDate),
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: name === "birthdayDate" ? new Date(value) : value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    /* onSave(formData); */
+    console.log(formData);
   };
 
   return (
@@ -79,14 +91,14 @@ const ModalEdit = ({ user }: ModalEditProps) => {
               <input
                 type="date"
                 name="birthdayDate"
-                value={formData.birthdayDate.toISOString().substr(0, 10)}
-                onChange={handleChange}
                 className="border rounded py-2 px-3 mt-2 mb-3 text-base text-darkGray focus:border-lightGray focus:outline-none"
+                value={formData.birthdayDate.toISOString().split("T")[0]}
+                onChange={handleChange}
               />
             </label>
           </div>
         </div>
-        <label className="flex flex-col text-textColorSecondary font-medium">
+        <label className="flex flex-col mt-9 text-textColorSecondary font-medium">
           Description
           <textarea
             name="description"
@@ -99,7 +111,10 @@ const ModalEdit = ({ user }: ModalEditProps) => {
           <button className="border border-MainBlue justify-start text-MainBlue px-4 py-2 rounded hover:bg-MainBlue/10">
             Cancel
           </button>
-          <button className="bg-blue-500 absolute right-0 text-white px-8 py-2 rounded hover:bg-blue-700">
+          <button
+            className="bg-blue-500 absolute right-0 text-white px-8 py-2 rounded hover:bg-blue-700"
+            onClick={handleSubmit}
+          >
             Edit
           </button>
         </div>

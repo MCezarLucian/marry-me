@@ -31,3 +31,11 @@ export type RegisterFormType = UseFormReturn<
   any,
   undefined
 >;
+
+export type MessageType = {
+  id: number;
+  senderId: number;
+  receiverId: number;
+  content: string;
+  timestamp: Date;
+};

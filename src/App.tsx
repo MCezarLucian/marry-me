@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import { users } from "./mockdata/data";
-import Navbar from "./components/navbar/Navbar";
-import ContactForm from "./components/contactForm/ContactForm";
-import Bio from "./components/bio/Bio";
-import Card from "./components/card.tsx/Card";
-import Filter from "./components/filter/Filter";
-import ModalDelete from "./components/modal-delete/ModalDelete";
-import ModalEdit from "./components/modalEdit/ModalEdit";
-
-//todo: validari,
 
 function App() {
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -20,16 +11,12 @@ function App() {
   };
 
   return (
-    <div>
-      {/* <ContactForm></ContactForm> */}
-      {/* <Bio user={users[0]}></Bio> */}
-      <ContactForm></ContactForm>
-      {/* <Filter users={users} onFilter={handleFilter}></Filter> */}
-      {/*  <div className="user-cards">
-        {filteredUsers.map((user) => (
-          <Card key={user.id} user={user} />
-        ))}
-      </div> */}
+    <div className="h-screen w-full flex flex-col items-center justify-center bg-gray-100 border-b-2 border-gray-200">
+      <Navbar logged user={users[0]} />
+      <div className="h-[calc(100vh-143px)] w-[60%] flex justify-center items-center">
+        <LoginForm />
+      </div>
+      <Footer />
     </div>
   );
 }
