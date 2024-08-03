@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        bgGray: "#A1A7C4",
         NeonBlue: "#01F5F5",
         MainBlue: "#1E5EFF",
         MainPink: "#F500F5",
@@ -28,6 +29,8 @@ module.exports = {
         customStart: "#1E5EFF",
         customEnd: "#F500F5",
         backgroundGray: "#F5F6FA",
+        textColorSecondary: "#5A607F",
+        lightGray: "#D9E1EC",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {

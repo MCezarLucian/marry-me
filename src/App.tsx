@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
 import { users } from "./mockdata/data";
-import Card from "./components/Card.tsx/Card";
-import Filter from "./components/Filter/Filter";
+import Navbar from "./components/navbar/Navbar";
+import ContactForm from "./components/contactForm/ContactForm";
+import Bio from "./components/bio/Bio";
+import Card from "./components/card.tsx/Card";
+import Filter from "./components/filter/Filter";
+import ModalDelete from "./components/modal-delete/ModalDelete";
+import ModalEdit from "./components/modalEdit/ModalEdit";
+
+//todo: validari,
 
 function App() {
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -15,8 +21,10 @@ function App() {
 
   return (
     <div>
-      <Navbar></Navbar>
-      <Filter users={users} onFilter={handleFilter} />
+      {/* <ContactForm></ContactForm> */}
+      {/* <Bio user={users[0]}></Bio> */}
+      <ContactForm></ContactForm>
+      {/* <Filter users={users} onFilter={handleFilter}></Filter> */}
       {/*  <div className="user-cards">
         {filteredUsers.map((user) => (
           <Card key={user.id} user={user} />
