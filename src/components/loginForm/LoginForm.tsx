@@ -25,16 +25,14 @@ const LoginForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof LogInFormSchema>) {
-    console.log(values);
+  function onSubmit(e: React.MouseEvent) {
+    e.preventDefault();
+    console.log(form.getValues());
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="font-Inter text-gray-700 rounded-xl w-1/2 h-[64vh] py-14 px-24 bg-white flex flex-col gap-4"
-      >
+      <form className="font-Inter text-gray-700 rounded-xl w-1/2 h-[64vh] py-14 px-24 bg-white flex flex-col gap-4">
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <h1 className="text-4xl font-bold text-black">Log In</h1>
           <div className="flex flex-row gap-2">
@@ -90,7 +88,10 @@ const LoginForm = () => {
             />
           </div>
           <div className="flex w-full flex-col gap-8">
-            <Button type="submit" className="w-full">
+            <Button
+              className="w-full"
+              onClick={(e: React.MouseEvent) => onSubmit(e)}
+            >
               Log in
             </Button>
             <div className="flex justify-end w-full">

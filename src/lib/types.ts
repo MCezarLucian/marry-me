@@ -39,3 +39,14 @@ export type MessageType = {
   content: string;
   timestamp: Date;
 };
+
+export type ForgotPasswordType = UseFormReturn<
+  {
+    email: string;
+    code: string;
+    password: string;
+    confirmPassword: string;
+  },
+  any,
+  undefined
+>;
