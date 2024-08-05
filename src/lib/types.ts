@@ -10,10 +10,16 @@ export type UserType = {
   gender: string;
   birthdayDate: Date;
   description: string;
-  attributes: string[];
-  soulmateAttributes: string[];
+  attributes: AttributesType[];
+  soulmateAttributes: AttributesType[];
   imageUrls: string[];
   profilePicture: string;
+};
+
+export type AttributesType = {
+  id: string;
+  name: string;
+  value: number;
 };
 
 export type RegisterFormType = UseFormReturn<
