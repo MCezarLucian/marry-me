@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Star as StarIcon } from "lucide-react";
 
 interface RatingProps {
+  attributeId?: string;
   value: number;
-  onChange: (rating: number) => void;
   edit: boolean;
 }
 
-const Rating: React.FC<RatingProps> = ({ value, onChange, edit }) => {
+const Rating: React.FC<RatingProps> = ({ value, edit, attributeId }) => {
+  const [rating, setRating] = useState(value);
   const [hover, setHover] = useState<number | null>(null);
-  const roundedValue = Math.round(value);
 
   const handleMouseEnter = (index: number) => {
     setHover(index);
@@ -20,7 +20,8 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, edit }) => {
   };
 
   const handleClick = (index: number) => {
-    onChange(index + 1);
+    setRating(index + 1);
+    //api
   };
 
   return (
@@ -30,15 +31,13 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, edit }) => {
           <StarIcon
             key={index}
             className={`w-6 h-6 cursor-pointer ${
-              index < (hover ?? roundedValue)
-                ? "text-yellow-400"
-                : "text-gray-400"
+              index < (hover ?? rating) ? "text-yellow-400" : "text-gray-400"
             }`}
             onMouseEnter={() => handleMouseEnter(index + 1)}
             onMouseLeave={handleMouseLeave}
             onClick={() => handleClick(index)}
-            fill={index < (hover ?? roundedValue) ? "#f59e0b" : "none"}
-            stroke={index < (hover ?? roundedValue) ? "none" : "#9ca3af"}
+            fill={index < (hover ?? rating) ? "#f59e0b" : "none"}
+            stroke={index < (hover ?? rating) ? "none" : "#9ca3af"}
           />
         ))}
       {!edit &&
@@ -46,12 +45,10 @@ const Rating: React.FC<RatingProps> = ({ value, onChange, edit }) => {
           <StarIcon
             key={index}
             className={`w-6 h-6 cursor-pointer ${
-              index < (hover ?? roundedValue)
-                ? "text-yellow-400"
-                : "text-gray-400"
+              index < (hover ?? rating) ? "text-yellow-400" : "text-gray-400"
             }`}
-            fill={index < (hover ?? roundedValue) ? "#f59e0b" : "none"}
-            stroke={index < (hover ?? roundedValue) ? "none" : "#9ca3af"}
+            fill={index < (hover ?? rating) ? "#f59e0b" : "none"}
+            stroke={index < (hover ?? rating) ? "none" : "#9ca3af"}
           />
         ))}
       {`(${value})`}

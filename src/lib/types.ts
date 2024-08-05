@@ -10,7 +10,7 @@ export type UserType = {
   gender: string;
   birthdayDate: Date;
   description: string;
-  attributes: string[];
+  attributes: AttributesType[];
   soulmateAttributes: AttributesType[];
   imageUrls: string[];
   profilePicture: string;
