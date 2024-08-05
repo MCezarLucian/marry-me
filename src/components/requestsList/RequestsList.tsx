@@ -14,7 +14,7 @@ const RequestsList = ({ users }: RequestsListProps) => {
   }
 
   return (
-    <div className="font-Inter rounded-xl w-full h-[64vh] py-14 px-24 bg-white flex flex-col gap-12">
+    <div className="font-Inter rounded-xl w-2/3 h-[64vh] py-14 px-24 bg-white flex flex-col gap-12">
       <p className="text-4xl font-bold">Requests</p>
       <div className="flex flex-col w-full gap-8">
         {users.map((user: UserType) => (

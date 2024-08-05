@@ -36,12 +36,12 @@ const RequestItem = ({ user, isOpen, onClose }: RequestItemProps) => {
           <CircleX
             onClick={(e) => rejectRequest(e)}
             size={36}
-            className="text-red-600"
+            className="text-red-600 hover:text-red-900"
           />
           <CircleCheck
             onClick={(e) => approveRequest(e)}
             size={36}
-            className="text-green-600"
+            className="text-green-600 hover:text-green-900"
           />
         </div>
       </div>
