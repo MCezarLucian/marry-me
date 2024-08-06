@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import Filter from "../filter/Filter";
-import Footer from "../footer/Footer";
-import Navbar from "../navbar/Navbar";
 import Card from "../card.tsx/Card";
 import { UserType } from "@/lib/types";
 import Chat from "../chat/Chat";
@@ -36,8 +34,7 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col justify-center bg-gray-100 border-gray-200 relative">
-      <Navbar user={users[0]} />
+    <div className="w-full flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
       <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-1/4 left-1/4">
         {filteredUsers.map((user) => (
@@ -57,7 +54,6 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
           onClose={handleCloseChat}
         />
       )}
-      <Footer />
     </div>
   );
 };
