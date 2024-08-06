@@ -7,8 +7,14 @@ export const users: UserType[] = [
     lastName: "Stone",
     age: 30,
     email: "john.stone@email.com",
-    attributes: ["Honestly", "Loyalty"],
-    soulmateAttributes: ["Honestly", "Loyalty"],
+    attributes: [
+      { id: "1", name: "Honestly", value: 0 },
+      { id: "2", name: "Loyalty", value: 0 },
+    ],
+    soulmateAttributes: [
+      { id: "1", name: "Honestly", value: 0 },
+      { id: "2", name: "Loyalty", value: 0 },
+    ],
     phoneNumber: "0743491829",
     gender: "male",
     description: "This is John Stone description",

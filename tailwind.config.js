@@ -83,6 +83,7 @@ module.exports = {
       },
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
+        Pattaya: ["Pattaya", "sans-serif"],
       },
     },
   },

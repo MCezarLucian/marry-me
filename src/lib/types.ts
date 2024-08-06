@@ -10,10 +10,16 @@ export type UserType = {
   gender: string;
   birthdayDate: Date;
   description: string;
-  attributes: string[];
-  soulmateAttributes: string[];
+  attributes: AttributesType[];
+  soulmateAttributes: AttributesType[];
   imageUrls: string[];
   profilePicture: string;
+};
+
+export type AttributesType = {
+  id: string;
+  name: string;
+  value: number;
 };
 
 export type RegisterFormType = UseFormReturn<
@@ -39,3 +45,14 @@ export type MessageType = {
   content: string;
   timestamp: Date;
 };
+
+export type ForgotPasswordType = UseFormReturn<
+  {
+    email: string;
+    code: string;
+    password: string;
+    confirmPassword: string;
+  },
+  any,
+  undefined
+>;
