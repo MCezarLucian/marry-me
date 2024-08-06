@@ -9,6 +9,7 @@ import ParticipantList from "./components/pages/ParticipantList";
 import { users } from "./mockdata/data";
 import IndividualPage from "./components/pages/IndividualPage";
 import ContactForm from "./components/contactForm/ContactForm";
+import MyProfilePage from "./components/pages/MyProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <SignUpPage /> },
       { path: "/requests", element: <RequestsPage /> },
       { path: "/contact", element: <ContactForm /> },
+      { path: "/my_profile", element: <MyProfilePage user={users} /> },
       {
         path: "/participant_list",
         element: (

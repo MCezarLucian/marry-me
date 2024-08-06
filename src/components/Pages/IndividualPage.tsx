@@ -1,6 +1,6 @@
 import { UserType } from "@/lib/types";
 import React, { useState } from "react";
-import Bio from "../bio/Bio";
+import Bio from "../bio/BioIndividualPage";
 import Chat from "../chat/Chat";
 
 interface IndividualPageProps {
