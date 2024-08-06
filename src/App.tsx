@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import ParticipantList from "./components/Pages/ParticipantList";
+import ParticipantList from "./components/pages/ParticipantList";
 import { users } from "./mockdata/data";
 
 function App() {

@@ -36,7 +36,7 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
   return (
     <div className="w-full flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
-      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-1/4 left-1/4">
+      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-10 left-1/4">
         {filteredUsers.map((user) => (
           <Card
             key={user.id}

@@ -17,16 +17,29 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
   const [triggerSearch, setTriggerSearch] = useState<boolean>(false);
   const [range, setRange] = useState<[number, number]>([18, 110]);
   const [sliderChanged, setSliderChanged] = useState<boolean>(false);
+  const [resetSlider, setResetSlider] = useState<boolean>(false);
 
   const handleSliderChange = (values: [number, number]) => {
     setRange(values);
     setSliderChanged(true);
+    setSelectedAgeRanges([]);
   };
 
   const handleAgeRangeChange = (range: string) => {
-    setSelectedAgeRanges((prev) =>
-      prev.includes(range) ? prev.filter((r) => r !== range) : [...prev, range]
-    );
+    const newSelectedRanges = selectedAgeRanges.includes(range)
+      ? selectedAgeRanges.filter((r) => r !== range)
+      : [...selectedAgeRanges, range];
+
+    setSelectedAgeRanges(newSelectedRanges);
+
+    if (newSelectedRanges.length === 1) {
+      const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
+      setRange([min, max]);
+      setSliderChanged(false);
+    } else {
+      setRange([18, 110]);
+      setSliderChanged(false);
+    }
   };
 
   const handleGenderChange = (gender: string) => {
@@ -111,7 +124,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
   ]);
 
   return (
-    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 min-h-screen bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1 overflow-y-auto">
+    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 min-h-screen bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1">
       <div className="mb-4 w-full">
         <input
           type="text"
