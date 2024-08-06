@@ -5,6 +5,8 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import SignUpPage from "./pages/SignUpPage";
 import App from "./App";
 import RequestsPage from "./pages/RequestsPage";
+import ParticipantList from "./components/Pages/ParticipantList";
+import { users } from "./mockdata/data";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,16 @@ const router = createBrowserRouter([
       { path: "/forgot_password", element: <ForgotPasswordPage /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/requests", element: <RequestsPage /> },
+      {
+        path: "/participant_list",
+        element: (
+          <ParticipantList
+            users={users}
+            sender={users[0]}
+            receiver={users[0]}
+          />
+        ),
+      },
     ],
   },
 ]);

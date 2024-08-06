@@ -20,7 +20,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
 
   const handleSliderChange = (values: [number, number]) => {
     setRange(values);
-    setSliderChanged(true); // Mark slider as changed
+    setSliderChanged(true);
   };
 
   const handleAgeRangeChange = (range: string) => {
@@ -58,7 +58,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
 
         const matchesAttributes = attributes
           ? user.attributes.some((attr) =>
-              attr.toLowerCase().includes(attributes.toLowerCase())
+              attr.name.toLowerCase().includes(attributes.toLowerCase())
             )
           : true;
 
@@ -68,7 +68,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
               const [min, max] = range.split(" > ").map(Number);
               return age >= min && age < max;
             })
-          : sliderChanged // Apply slider range only if it's changed
+          : sliderChanged
           ? age >= range[0] && age <= range[1]
           : true;
 
@@ -76,9 +76,9 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
           ? selectedGenders.includes(user.gender)
           : true;
 
-        /* const matchesType = admin
+        /*  const matchesType = admin
           ? selectedTypes.length
-            ? selectedTypes.includes(user.type) 
+            ? selectedTypes.includes(user.type)
             : true
           : true; */
 
@@ -95,7 +95,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
     };
 
     filterUsers();
-    setTriggerSearch(false); // Reset trigger after filtering
+    setTriggerSearch(false);
   }, [
     triggerSearch,
     name,
@@ -104,7 +104,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
     selectedGenders,
     selectedTypes,
     range,
-    sliderChanged, // Add sliderChanged to dependency array
+    sliderChanged,
     users,
     admin,
     onFilterChange,
@@ -180,7 +180,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
 
           <DoubleIntervalSlider
             min={18}
-            max={100}
+            max={110}
             step={1}
             onChange={handleSliderChange}
           ></DoubleIntervalSlider>
