@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="w-screen h-[75px] flex flex-row justify-between items-center p-4 bg-gradient-to-r from-MainBlue to-MainPink font-Inter text-white">
+    <div className="h-[75px] flex flex-row justify-between items-center p-4 bg-gradient-to-r from-MainBlue to-MainPink font-Inter text-white">
       <div className="flex flex-row justify-center items-center gap-4">
         <Facebook className="cursor-pointer" />
         <Instagram className="cursor-pointer" />
