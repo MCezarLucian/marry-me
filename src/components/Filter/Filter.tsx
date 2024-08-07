@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UserType } from "@/lib/types";
+import { UserType } from "../../lib/types";
 import DoubleIntervalSlider from "./DoubleIntervalSlider";
 
 interface FilterProps {

@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { BACKEND_API_URL } from "../configuration/api";
 import { UserType } from "../lib/types";
 import axios from "axios";
@@ -22,10 +23,16 @@ const useUserStore = create<UserStoreType>((set) => ({
     set({ loading: true, error: null });
     try {
       const response = await axios.get<UserType[]>(
-        `${BACKEND_API_URL}/user/index`
+        `${BACKEND_API_URL}/user/index`,
+        {
+          headers: {
+            Authorization: `session_id Cookies.get("sessionToken")`,
+          },
+        }
       );
       set({ users: response.data, loading: false });
-    } catch (error) {
+    } catch (error: any) {
+      // console.log(error.response.data);
       set({
         error: error instanceof Error ? error.message : "An error occurred",
         loading: false,

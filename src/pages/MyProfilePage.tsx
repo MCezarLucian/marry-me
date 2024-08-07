@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import BioMyProfile from "../bio/BioMyProfile";
-import { users } from "../../mockdata/data";
-import { UserType } from "@/lib/types";
-import ModalDelete from "../modal-delete/ModalDelete";
-import ModalEdit from "../modalEdit/ModalEdit";
+import { UserType } from "../lib/types";
+import BioMyProfile from "../components/bio/BioMyProfile";
+import ModalDelete from "../components/modal-delete/ModalDelete";
+import ModalEdit from "../components/modalEdit/ModalEdit";
+import { users } from "../mockdata/data";
 
 interface MyProfileProps {
   user: UserType[];

@@ -64,9 +64,6 @@ export type MessageType = {
 export type ForgotPasswordType = UseFormReturn<
   {
     email: string;
-    code: string;
-    password: string;
-    confirmPassword: string;
   },
   any,
   undefined

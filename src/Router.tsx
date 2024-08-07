@@ -6,11 +6,12 @@ import App from "./App";
 import RequestsPage from "./pages/RequestsPage";
 import SignUpPageParticipant from "./pages/SignUpPageParticipant";
 import SignUpPageRegular from "./pages/SignUpPageRegular";
-import ParticipantList from "./components/pages/ParticipantList";
 import { users } from "./mockdata/data";
-import IndividualPage from "./components/pages/IndividualPage";
 import ContactForm from "./components/contactForm/ContactForm";
-import MyProfilePage from "./components/pages/MyProfilePage";
+import SetPasswordPage from "./pages/SetPasswordPage";
+import ParticipantList from "./pages/ParticipantList";
+import IndividualPage from "./pages/IndividualPage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/", element: <App /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/forgot_password", element: <ForgotPasswordPage /> },
+      { path: "/set_password", element: <SetPasswordPage /> },
       { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
       { path: "/signup_regular", element: <SignUpPageRegular /> },
       { path: "/requests", element: <RequestsPage /> },

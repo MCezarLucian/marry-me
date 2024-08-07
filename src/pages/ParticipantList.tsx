@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Filter from "../filter/Filter";
-import Card from "../card.tsx/Card";
-import { UserType } from "@/lib/types";
-import Chat from "../chat/Chat";
+
+import { UserType } from "../lib/types";
+import Chat from "../components/chat/Chat";
+import Filter from "../components/Filter/Filter";
+import Card from "../components/Card.tsx/Card";
 
 interface ParticipantListProps {
   users: UserType[];
@@ -48,15 +49,15 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
               onClick={() => handleCardClick(user)}
             />
           ))}
-        {!admin &&
-          filteredUsers./* filter((user) => user.role). */ map((user) => (
+        {/* {!admin &&
+          filteredUsers. filter((user) => user.role).  map((user) => (
             <Card
               key={user.id}
               user={user}
               openChat={openChat}
               onClick={() => handleCardClick(user)}
             />
-          ))}
+          ))} */}
       </div>
       {openChat && selectedUser && (
         <Chat

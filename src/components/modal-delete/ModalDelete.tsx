@@ -1,5 +1,5 @@
 import React from "react";
-import { UserType } from "@/lib/types";
+import { UserType } from "../../lib/types";
 
 interface ModalDeleteProps {
   user: UserType; //user data
