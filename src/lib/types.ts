@@ -29,14 +29,29 @@ export type RegisterFormType = UseFormReturn<
     email: string;
     phoneNumber: string;
     gender: string;
-    birthdayDate: Date;
+    birthdayDate: string;
     description: string;
     attributes: string;
     soulmateAttributes: string;
+    password: string;
+    confirmPassword: string;
   },
   any,
   undefined
 >;
+
+export type SignupMapType = {
+  role_type: string;
+  full_name: string;
+  email: string;
+  phone_number: string;
+  gender: string;
+  date_of_birth: string;
+  description?: string;
+  personal_attributes?: string[];
+  searched_attributes?: string[];
+  password: string;
+};
 
 export type MessageType = {
   id: number;
