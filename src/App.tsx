@@ -1,12 +1,10 @@
 import React from "react";
 import "./App.css";
-import Home from "./components/home/Home";
+import ParticipantList from "./components/pages/ParticipantList";
+import { users } from "./mockdata/data";
+
 function App() {
-  return (
-    <div className="w-full h-[calc(100vh-143px)] grid grid-rows-8">
-      <Home />
-    </div>
-  );
+  return <div></div>;
 }
 
 export default App;
