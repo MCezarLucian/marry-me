@@ -16,6 +16,7 @@ import {
   MultiSelectorTrigger,
 } from "../ui/multiSelect";
 import { Button } from "../ui/button";
+import Spinner from "../spinner/Spinner";
 
 interface RegisterStepFiveProps {
   form: RegisterFormType;
@@ -27,10 +28,14 @@ interface RegisterStepFiveProps {
     email: string;
     phoneNumber: string;
     gender: string;
-    birthdayDate: Date;
+    birthdayDate: string;
     description: string;
     attributes: string;
+    password: string;
+    confirmPassword: string;
   }) => void;
+  message: string;
+  loading: boolean;
 }
 
 const options = [
@@ -42,6 +47,8 @@ const RegisterStepFive = ({
   form,
   handlePrev,
   handleSubmit,
+  loading,
+  message,
 }: RegisterStepFiveProps) => {
   const [value, setValue] = useState<string[]>([]);
 
@@ -81,6 +88,8 @@ const RegisterStepFive = ({
           </FormItem>
         )}
       />
+      {loading && <Spinner />}
+      <p className="text-red-600">{message}</p>
       <div className="flex justify-between w-full">
         <Button className="w-1/3" onClick={handlePrev}>
           Prev

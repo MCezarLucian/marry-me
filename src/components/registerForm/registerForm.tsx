@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { format } from "date-fns";
 import { Form } from "../ui/form";
 import { RegisterFormSchema } from "../../schemas/RegisterFormSchema";
 import RegisterStepOne from "./registerStepOne";
@@ -9,8 +10,18 @@ import RegisterStepThree from "./registerStepThree";
 import RegisterStepFour from "./registerStepFour";
 import RegisterStepFive from "./registerStepFive";
 import { useEffect, useState } from "react";
+import { SignupMapType } from "../../lib/types";
+import useSignUpStore from "../../store/useSignupStore";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
+  const { status, message, fetchSignUp, loading } = useSignUpStore((state) => ({
+    loading: state.loading,
+    status: state.status,
+    message: state.message,
+    fetchSignUp: state.fetchSignUp,
+  }));
+  const navigate = useNavigate();
   const [formState, setFormState] = useState(1);
   const form = useForm<z.infer<typeof RegisterFormSchema>>({
     resolver: zodResolver(RegisterFormSchema),
@@ -20,9 +31,11 @@ const RegisterForm = () => {
       email: "",
       phoneNumber: "",
       gender: "",
-      birthdayDate: undefined,
+      birthdayDate: "",
       attributes: "",
       soulmateAttributes: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -37,13 +50,24 @@ const RegisterForm = () => {
   };
 
   function onSubmit(values: z.infer<typeof RegisterFormSchema>) {
-    const formData = {
-      ...values,
-      attributes: values.attributes.split(","),
-      soulmateAttributes: values.soulmateAttributes.split(","),
+    const fetchData: SignupMapType = {
+      role_type: "Contestant",
+      full_name: `${values.firstName} ${values.lastName}`,
+      email: values.email,
+      phone_number: values.phoneNumber,
+      gender: values.gender,
+      date_of_birth: format(values.birthdayDate, "yyyy-MM-dd"),
+      description: values.description,
+      personal_attributes: values.attributes.split(","),
+      searched_attributes: values.soulmateAttributes.split(","),
+      password: values.password,
     };
 
-    console.log(formData);
+    // console.log(fetchData);
+    fetchSignUp(fetchData);
+    if (status === "success") {
+      navigate("/");
+    }
   }
 
   useEffect(() => {
@@ -78,6 +102,12 @@ const RegisterForm = () => {
             break;
           case "soulmateAttributes":
             setFormState(5);
+            break;
+          case "password":
+            setFormState(4);
+            break;
+          case "confirmPassword":
+            setFormState(4);
             break;
           default:
             break;
@@ -131,6 +161,8 @@ const RegisterForm = () => {
             form={form}
             handlePrev={handlePrev}
             handleSubmit={onSubmit}
+            message={message ? message : ""}
+            loading={loading}
           />
         )}
         {/* <Button type="submit">Submit</Button> */}
