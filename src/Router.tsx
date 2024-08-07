@@ -12,6 +12,7 @@ import SetPasswordPage from "./pages/SetPasswordPage";
 import ParticipantList from "./pages/ParticipantList";
 import IndividualPage from "./pages/IndividualPage";
 import MyProfilePage from "./pages/MyProfilePage";
+import Logo from "./components/ui/logo";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +20,6 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <App /> },
-      { path: "/login", element: <LoginPage /> },
-      { path: "/forgot_password", element: <ForgotPasswordPage /> },
-      { path: "/set_password", element: <SetPasswordPage /> },
-      { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
-      { path: "/signup_regular", element: <SignUpPageRegular /> },
       { path: "/requests", element: <RequestsPage /> },
       { path: "/contact", element: <ContactForm /> },
       { path: "/my_profile", element: <MyProfilePage user={users} /> },
@@ -43,6 +39,17 @@ const router = createBrowserRouter([
           <IndividualPage users={users} sender={users[0]} receiver={users[0]} />
         ),
       },
+    ],
+  },
+  {
+    path: "/",
+    element: <Logo />,
+    children: [
+      { path: "/login", element: <LoginPage /> },
+      { path: "/forgot_password", element: <ForgotPasswordPage /> },
+      { path: "/set_password", element: <SetPasswordPage /> },
+      { path: "/signup_participant", element: <SignUpPageParticipant /> },
+      { path: "/signup_regular", element: <SignUpPageRegular /> },
     ],
   },
 ]);

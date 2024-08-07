@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
-import Filter from "../components/Filter/Filter";
-import Card from "../components/Card.tsx/Card";
+import Filter from "../components/filter/Filter";
+import Card from "../components/card.tsx/Card";
 
 interface ParticipantListProps {
   users: UserType[];
