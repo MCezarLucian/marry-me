@@ -36,10 +36,15 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
       setRange([min, max]);
       setSliderChanged(false);
+      setResetSlider(true);
     } else {
       setRange([18, 110]);
       setSliderChanged(false);
     }
+  };
+
+  const resetSliderRange = () => {
+    setResetSlider(false);
   };
 
   const handleGenderChange = (gender: string) => {
@@ -185,6 +190,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
                 value={range}
                 checked={selectedAgeRanges.includes(range)}
                 onChange={() => handleAgeRangeChange(range)}
+                onClick={resetSliderRange}
                 className="mr-2 w-4 h-4"
               />
               {range}
@@ -196,6 +202,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
             max={110}
             step={1}
             onChange={handleSliderChange}
+            reset={resetSlider}
           ></DoubleIntervalSlider>
         </div>
       </div>

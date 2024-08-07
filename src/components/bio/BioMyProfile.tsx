@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { UserType } from "@/lib/types";
 import { Star } from "lucide-react";
-import RatingModal from "../rating/RatingModal";
 import ProfilePicture from "../imageUploader/ProfilePicture";
 import ProfilePicturePen from "../imageUploader/ProfilePicturePen";
 
