@@ -1,7 +1,9 @@
 import React from "react";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const gradientTextStyle = {
     background: "linear-gradient(to right, #f500f5, #1e5eff)",
     WebkitBackgroundClip: "text",
@@ -35,7 +37,12 @@ const Home = () => {
             beautiful future with someone special. Let us help you find the love
             story you’ve always dreamed of.
           </p>
-          <Button className="font-Inter w-32">Start Now</Button>
+          <Button
+            onClick={() => navigate("/login")}
+            className="font-Inter w-32"
+          >
+            Start Now
+          </Button>
         </div>
       </div>
     </>

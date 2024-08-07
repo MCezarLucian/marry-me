@@ -6,7 +6,11 @@ import { create } from "zustand";
 interface LoginResponseType {
   status: string;
   message?: string;
-  data: string;
+  data: {
+    status: string;
+    user: UserType;
+    sessionToken: string;
+  };
 }
 
 interface LoginType {
@@ -55,9 +59,8 @@ const useLoginStore = create<LoginType>((set) => ({
           },
         }
       );
-      const responseString: any = response.data;
-      const jsonString = responseString.split("}$")[0] + "}";
-      const { status, message, data } = JSON.parse(jsonString);
+      // console.log(response.data);
+      const { status, message, data } = response.data;
       console.log({ status, message, data });
       set({
         user: data.user,
@@ -67,12 +70,8 @@ const useLoginStore = create<LoginType>((set) => ({
         sessionToken: data.sessionToken,
       });
     } catch (error: any) {
-      const responseString = error.response.data;
-      const jsonString = responseString.split("}$")[0] + "}";
-
-      const parsedResponse = JSON.parse(jsonString);
-      const status = parsedResponse.status;
-      const message = parsedResponse.message;
+      const status = error.response.data.status;
+      const message = error.response.data.message;
 
       set({
         error: error instanceof Error ? error.message : "An error occurred",
