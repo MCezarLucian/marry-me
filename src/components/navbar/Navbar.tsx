@@ -12,7 +12,7 @@ interface NavbarProps {
 function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
   if (admin) {
     return (
-      <div className="flex flex-row gap-4 pr-4 justify-center items-center">
+      <div className="flex flex-row gap-4 pr-4 justify-center items-center top-0">
         <a className="hover:text-MainPink" href="/">
           Home
         </a>
@@ -57,7 +57,7 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
 
 const Navbar = ({ logged, admin, user }: NavbarProps) => {
   return (
-    <div className="w-screen drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter">
+    <div className=" drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter top-0 bg-white">
       <div className="flex justify-center items-center pl-4 gap-4 font-bold">
         <img src="images/logo.png" alt="logo" />
         <p className="text-3xl">Marry Me</p>

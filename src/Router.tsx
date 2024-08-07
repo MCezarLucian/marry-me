@@ -6,7 +6,12 @@ import App from "./App";
 import RequestsPage from "./pages/RequestsPage";
 import SignUpPageParticipant from "./pages/SignUpPageParticipant";
 import SignUpPageRegular from "./pages/SignUpPageRegular";
+import { users } from "./mockdata/data";
+import ContactForm from "./components/contactForm/ContactForm";
 import SetPasswordPage from "./pages/SetPasswordPage";
+import ParticipantList from "./pages/ParticipantList";
+import IndividualPage from "./pages/IndividualPage";
+import MyProfilePage from "./pages/MyProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +25,24 @@ const router = createBrowserRouter([
       { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
       { path: "/signup_regular", element: <SignUpPageRegular /> },
       { path: "/requests", element: <RequestsPage /> },
+      { path: "/contact", element: <ContactForm /> },
+      { path: "/my_profile", element: <MyProfilePage user={users} /> },
+      {
+        path: "/participant_list",
+        element: (
+          <ParticipantList
+            users={users}
+            sender={users[0]}
+            receiver={users[0]}
+          />
+        ),
+      },
+      {
+        path: "/individual_Page",
+        element: (
+          <IndividualPage users={users} sender={users[0]} receiver={users[0]} />
+        ),
+      },
     ],
   },
 ]);

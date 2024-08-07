@@ -8,9 +8,11 @@ import SendMessage from "./Send";
 interface ChatProps {
   sender: UserType;
   receiver: UserType;
+  openChat: boolean;
+  onClose: () => void;
 }
 
-const Chat = ({ sender, receiver }: ChatProps) => {
+const Chat = ({ sender, receiver, onClose }: ChatProps) => {
   const [chatMessages, SetChatMessages] = useState<MessageType[]>(messages);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -44,8 +46,8 @@ const Chat = ({ sender, receiver }: ChatProps) => {
   }, [chatMessages]);
 
   return (
-    <div className="h-[50vh] grid grid-rows-12 w-[30vh] border border-gray-200 gap-4 bg-white">
-      <ChatHeader name={receiver.firstName} />
+    <div className="h-[50vh] grid grid-rows-12 w-[30vh] border border-gray-200 gap-4 bg-white fixed bottom-0 right-20">
+      <ChatHeader onClose={onClose} name={receiver.firstName} />
       <div className="row-span-9 p-2 flex flex-col gap-1 overflow-y-scroll">
         {chatMessages
           .filter(
