@@ -2,6 +2,7 @@ import { BACKEND_API_URL } from "../configuration/api";
 import { UserType } from "../lib/types";
 import axios from "axios";
 import { create } from "zustand";
+import Cookies from "js-cookie";
 
 interface LoginResponseType {
   status: string;
@@ -69,6 +70,7 @@ const useLoginStore = create<LoginType>((set) => ({
         message: message ?? null,
         sessionToken: data.sessionToken,
       });
+      Cookies.set("sessionToken", data.sessionToken, { expires: 1 });
     } catch (error: any) {
       const status = error.response.data.status;
       const message = error.response.data.message;

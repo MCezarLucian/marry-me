@@ -1,18 +1,13 @@
 import { z } from "zod";
 
-export const PasswordResetSchema = z
+export const PasswordResetSchema = z.object({
+  email: z.string().email({
+    message: "Invalid email address.",
+  }),
+});
+
+export const PasswordChangeSchema = z
   .object({
-    email: z.string().email({
-      message: "Invalid email address.",
-    }),
-    code: z
-      .string()
-      .length(6, {
-        message: "Code must be exactly 6 digits.",
-      })
-      .regex(/^\d{6}$/, {
-        message: "Code must be exactly 6 digits.",
-      }),
     password: z
       .string()
       .min(8, {

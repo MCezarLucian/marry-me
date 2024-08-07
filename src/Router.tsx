@@ -6,6 +6,7 @@ import App from "./App";
 import RequestsPage from "./pages/RequestsPage";
 import SignUpPageParticipant from "./pages/SignUpPageParticipant";
 import SignUpPageRegular from "./pages/SignUpPageRegular";
+import SetPasswordPage from "./pages/SetPasswordPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "/", element: <App /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/forgot_password", element: <ForgotPasswordPage /> },
+      { path: "/set_password", element: <SetPasswordPage /> },
       { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
       { path: "/signup_regular", element: <SignUpPageRegular /> },
       { path: "/requests", element: <RequestsPage /> },
