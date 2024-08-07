@@ -14,16 +14,12 @@ import IndividualPage from "./pages/IndividualPage";
 import MyProfilePage from "./pages/MyProfilePage";
 
 const router = createBrowserRouter([
+  { path: "/", element: <App /> },
   {
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/", element: <App /> },
-      { path: "/login", element: <LoginPage /> },
-      { path: "/forgot_password", element: <ForgotPasswordPage /> },
-      { path: "/set_password", element: <SetPasswordPage /> },
-      { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
-      { path: "/signup_regular", element: <SignUpPageRegular /> },
+      // { path: "/", element: <App /> },
       { path: "/requests", element: <RequestsPage /> },
       { path: "/contact", element: <ContactForm /> },
       { path: "/my_profile", element: <MyProfilePage user={users} /> },
@@ -45,6 +41,12 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  { path: "/login", element: <LoginPage /> },
+  { path: "/forgot_password", element: <ForgotPasswordPage /> },
+  { path: "/set_password", element: <SetPasswordPage /> },
+  { path: "/signup_pariticpant", element: <SignUpPageParticipant /> },
+  { path: "/signup_regular", element: <SignUpPageRegular /> },
 ]);
 
 function Router() {

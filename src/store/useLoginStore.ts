@@ -62,6 +62,7 @@ const useLoginStore = create<LoginType>((set) => ({
       );
       // console.log(response.data);
       const { status, message, data } = response.data;
+      localStorage.setItem("user", JSON.stringify(data.user));
       console.log({ status, message, data });
       set({
         user: data.user,
