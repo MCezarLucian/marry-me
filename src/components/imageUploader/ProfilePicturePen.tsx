@@ -9,6 +9,7 @@ import {
   FileUploaderItem,
 } from "../ui/FileInput";
 import { Plus } from "lucide-react";
+import { Pen } from "lucide-react"; // Import the pen icon
 
 interface FileUploadDropzoneProps {
   profilePicture?: string;
@@ -27,7 +28,7 @@ async function urlToFile(
   return new File([blob], filename, { type: mimeType });
 }
 
-const ProfilePicture = ({ profilePicture }: FileUploadDropzoneProps) => {
+const ProfilePicturePen = ({ profilePicture }: FileUploadDropzoneProps) => {
   const [files, setFiles] = useState<File[] | null>([]);
 
   useEffect(() => {
@@ -63,35 +64,31 @@ const ProfilePicture = ({ profilePicture }: FileUploadDropzoneProps) => {
       value={files}
       onValueChange={setFiles}
       dropzoneOptions={dropzone}
-      className="relative w-full h-[250px]"
+      className="relative w-[50px] h-[50px] rounded-full bg-lightGray border-2 flex items-center justify-center"
     >
       <FileInput>
-        <div className="flex items-center h-[220px] justify-center p-0 w-1/3 rounded-md absolute top-0 l-0 bg-transparent"></div>
-      </FileInput>
-      <FileUploaderContent className="grid grid-cols-3 max-h-[220px] items-center gap-2 p-0">
-        <div className="w-full h-full p-0">
+        <div className="flex items-center justify-center w-full h-full rounded-full bg-transparent">
           {files?.[0] ? (
             <FileUploaderItem
               index={0}
-              className="w-full p-0 rounded-md overflow-hidden h-[220px]"
+              className="w-full h-full rounded-full overflow-hidden"
             >
               <img
                 src={URL.createObjectURL(files[0])}
                 alt={"photo1"}
-                height={"100%"}
-                width={"100%"}
-                className="h-full w-full p-0 max-h-[220px]"
+                className="w-full h-full object-cover rounded-full"
               />
             </FileUploaderItem>
           ) : (
-            <div className="w-full p-0 h-[220px] bg-slate-200 rounded-lg flex items-center justify-center">
-              <Plus className="text-slate-500" />
+            <div className="flex items-center justify-center w-full h-full">
+              <Pen className="text-slate-500" />
             </div>
           )}
         </div>
-      </FileUploaderContent>
+      </FileInput>
+      {/* <FileUploaderContent className="hidden"></FileUploaderContent> */}
     </FileUploader>
   );
 };
 
-export default ProfilePicture;
+export default ProfilePicturePen;

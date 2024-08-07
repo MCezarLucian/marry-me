@@ -3,10 +3,12 @@ import { UserType } from "@/lib/types";
 
 interface ModalEditProps {
   user: UserType;
-  /*   onSave: (updatedUser: UserType) => void;*/
+  onSave: (updatedUser: UserType) => void;
+  openModalEdit: boolean;
+  onClose: () => void;
 }
 
-const ModalEdit = ({ user /* onSave */ }: ModalEditProps) => {
+const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
   const [formData, setFormData] = useState<UserType>({
     ...user,
     birthdayDate: new Date(user.birthdayDate),
@@ -103,7 +105,7 @@ const ModalEdit = ({ user /* onSave */ }: ModalEditProps) => {
       formData.gender &&
       formData.birthdayDate;
 
-    /* onSave(formData); */
+    onSave(formData);
     console.log(formData);
   };
 
@@ -229,7 +231,10 @@ const ModalEdit = ({ user /* onSave */ }: ModalEditProps) => {
           />
         </label>
         <div className="flex relative space-x-4 mt-4 ">
-          <button className="border border-MainBlue justify-start text-MainBlue px-4 py-2 rounded hover:bg-MainBlue/10">
+          <button
+            className="border border-MainBlue justify-start text-MainBlue px-4 py-2 rounded hover:bg-MainBlue/10"
+            onClick={onClose}
+          >
             Cancel
           </button>
           <button

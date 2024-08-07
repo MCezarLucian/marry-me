@@ -28,6 +28,7 @@ module.exports = {
         darkGray: "#A1A7C4",
         customStart: "#1E5EFF",
         customEnd: "#F500F5",
+        buttonDelete: "#FF0000",
         backgroundGray: "#F5F6FA",
         textColorSecondary: "#5A607F",
         lightGray: "#D9E1EC",
