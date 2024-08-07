@@ -65,9 +65,6 @@ const RegisterForm = () => {
 
     // console.log(fetchData);
     fetchSignUp(fetchData);
-    if (status === "success") {
-      navigate("/");
-    }
   }
 
   useEffect(() => {
@@ -113,6 +110,9 @@ const RegisterForm = () => {
             break;
         }
       }
+    }
+    if (status === "success") {
+      navigate("/");
     }
   }, [form.formState.errors, form.formState.isSubmitted]);
 

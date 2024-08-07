@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserType } from "@/lib/types";
+import { UserType } from "../../lib/types";
 
 interface ModalEditProps {
   user: UserType;

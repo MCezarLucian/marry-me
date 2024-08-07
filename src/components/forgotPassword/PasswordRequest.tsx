@@ -12,10 +12,9 @@ import { ForgotPasswordType } from "../../lib/types";
 
 interface PasswordRequestProps {
   form: ForgotPasswordType;
-  validateEmail: (e: React.MouseEvent) => void;
 }
 
-const PasswordRequest = ({ form, validateEmail }: PasswordRequestProps) => {
+const PasswordRequest = ({ form }: PasswordRequestProps) => {
   return (
     <>
       <div className="w-full flex flex-col justify-center items-center gap-4">
@@ -39,7 +38,7 @@ const PasswordRequest = ({ form, validateEmail }: PasswordRequestProps) => {
               </FormItem>
             )}
           />
-          <Button onClick={(e) => validateEmail(e)} className="w-full">
+          <Button type="submit" className="w-full">
             Reset Password
           </Button>
         </div>
