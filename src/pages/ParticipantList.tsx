@@ -1,23 +1,11 @@
 import React, { useState } from "react";
-
+import { users, messages } from "../mockdata/data";
 import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
 import Filter from "../components/filter/Filter";
 import Card from "../components/card.tsx/Card";
 
-interface ParticipantListProps {
-  users: UserType[];
-  admin?: UserType;
-  sender: UserType;
-  receiver: UserType;
-}
-
-const ParticipantList: React.FC<ParticipantListProps> = ({
-  users,
-  sender,
-  receiver,
-  admin,
-}) => {
+const ParticipantList = () => {
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
   const [openChat, setOpenChat] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
@@ -40,7 +28,8 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
     <div className="w-full flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
       <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-10 left-1/4">
-        {admin &&
+        {
+          /* admin && */
           filteredUsers.map((user) => (
             <Card
               key={user.id}
@@ -48,7 +37,8 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
               openChat={openChat}
               onClick={() => handleCardClick(user)}
             />
-          ))}
+          ))
+        }
         {/* {!admin &&
           filteredUsers. filter((user) => user.role).  map((user) => (
             <Card
@@ -61,7 +51,7 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
       </div>
       {openChat && selectedUser && (
         <Chat
-          sender={sender}
+          sender={users[0]}
           receiver={selectedUser}
           openChat={openChat}
           onClose={handleCloseChat}

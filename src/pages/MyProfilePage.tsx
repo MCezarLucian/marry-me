@@ -5,11 +5,7 @@ import ModalDelete from "../components/modal-delete/ModalDelete";
 import ModalEdit from "../components/modalEdit/ModalEdit";
 import { users } from "../mockdata/data";
 
-interface MyProfileProps {
-  user: UserType[];
-}
-
-const MyProfilePage = ({ user }: MyProfileProps) => {
+const MyProfilePage = () => {
   const [localUsers, setLocalUsers] = useState<UserType[]>(users);
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
@@ -45,7 +41,7 @@ const MyProfilePage = ({ user }: MyProfileProps) => {
   return (
     <div>
       <BioMyProfile
-        user={user[0]}
+        user={users[0]}
         openModalEdit={openModalEdit}
         onOpenModalEdit={handleOpenModalEdit}
         openModalDelete={openModalDelete}

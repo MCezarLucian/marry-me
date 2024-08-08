@@ -2,18 +2,9 @@ import { UserType } from "@/lib/types";
 import React, { useState } from "react";
 import Bio from "../components/bio/BioIndividualPage";
 import Chat from "../components/chat/Chat";
+import { users, messages } from "../mockdata/data";
 
-interface IndividualPageProps {
-  users: UserType[];
-  sender: UserType;
-  receiver: UserType;
-}
-
-const IndividualPage: React.FC<IndividualPageProps> = ({
-  users,
-  sender,
-  receiver,
-}) => {
+const IndividualPage = () => {
   const [openChat, setOpenChat] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
 
@@ -36,7 +27,7 @@ const IndividualPage: React.FC<IndividualPageProps> = ({
       ></Bio>
       {openChat && selectedUser && (
         <Chat
-          sender={sender}
+          sender={users[0]}
           receiver={selectedUser}
           openChat={openChat}
           onClose={handleCloseChat}
