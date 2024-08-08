@@ -25,8 +25,7 @@ const Card = ({ user, onClick }: CardProps) => {
           <Star className="text-darkGray fill-darkGray" />
         </div>
         <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
-          <div className="mr-1">{user.firstName}</div>
-          <div>{user.lastName} </div>
+          <div className="mr-1">{user.fullName}</div>
         </div>
         <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
           {user.age} years old

@@ -36,7 +36,7 @@ const Bio = ({ user, onClick }: BioProps) => {
             <div>
               <label>Name</label>
               <div className="mt-2 mb-3 text-base text-darkGray">
-                {user.firstName} {user.lastName}
+                {user.fullName}
               </div>
             </div>
             <div className="relative">
@@ -121,7 +121,9 @@ const Bio = ({ user, onClick }: BioProps) => {
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="My Attributes"
               readOnly
-              value={user.attributes.map((attr) => attr.name).join(", ")}
+              value={user.personalAttributes
+                .map((attr) => attr.name)
+                .join(", ")}
             />
           </div>
           <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
@@ -130,7 +132,7 @@ const Bio = ({ user, onClick }: BioProps) => {
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="Attributes for Soulmate"
               readOnly
-              value={user.soulmateAttributes
+              value={user.searchedAttributes
                 .map((attr) => attr.name)
                 .join(", ")}
             />
@@ -156,7 +158,7 @@ const Bio = ({ user, onClick }: BioProps) => {
       <RatingModal
         onClose={onClose}
         isOpen={isOpen}
-        attributes={user.attributes}
+        attributes={user.personalAttributes}
       />
     </div>
   );

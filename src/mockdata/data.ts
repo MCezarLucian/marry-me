@@ -3,22 +3,21 @@ import { MessageType, UserType } from "../lib/types";
 export const users: UserType[] = [
   {
     id: "1",
-    firstName: "John",
-    lastName: "Stone",
+    fullName: "John Stone",
     age: 30,
     email: "john.stone@email.com",
-    attributes: [
+    personalAttributes: [
       { id: "1", name: "Honestly", value: 0 },
       { id: "2", name: "Loyalty", value: 0 },
     ],
-    soulmateAttributes: [
+    searchedAttributes: [
       { id: "1", name: "Honestly", value: 0 },
       { id: "2", name: "Loyalty", value: 0 },
     ],
     phoneNumber: "0743491829",
     gender: "male",
     description: "This is John Stone description",
-    birthdayDate: new Date(),
+    dateOfBirth: new Date(),
     imageUrls: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTboK1wZUZPH3YbcQ-CKGZ5CNawKdSXs4c7jQ&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR02ArPIOrwQDvzDoXHcho4hRHt5KGT8G1rEw&s",
@@ -26,6 +25,9 @@ export const users: UserType[] = [
     ],
     profilePicture:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR02ArPIOrwQDvzDoXHcho4hRHt5KGT8G1rEw&s",
+    rating: 4,
+    roleId: "2",
+    roleType: "Contestant",
   },
 ];
 

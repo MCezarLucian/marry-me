@@ -44,7 +44,7 @@ const RegisterStepFour = ({
   }, [value, form]);
 
   return (
-    <div className="h-[80%] w-full flex justify-between flex-col">
+    <div className="h-[80%] w-full flex justify-between flex-col gap-12">
       <div className="w-full flex gap-4 flex-col">
         <FormField
           control={form.control}

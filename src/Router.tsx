@@ -15,6 +15,7 @@ import MyProfilePage from "./pages/MyProfilePage";
 import Logo from "./components/ui/logo";
 
 const router = createBrowserRouter([
+  { path: "/", element: <App /> },
   {
     path: "/",
     element: <MainLayout />,
@@ -25,13 +26,7 @@ const router = createBrowserRouter([
       { path: "/my_profile", element: <MyProfilePage user={users} /> },
       {
         path: "/participant_list",
-        element: (
-          <ParticipantList
-            users={users}
-            sender={users[0]}
-            receiver={users[0]}
-          />
-        ),
+        element: <ParticipantList />,
       },
       {
         path: "/individual_Page",

@@ -70,12 +70,11 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
     const filterUsers = () => {
       const filtered = users.filter((user) => {
         const matchesName = name
-          ? user.firstName.toLowerCase().includes(name.toLowerCase()) ||
-            user.lastName.toLowerCase().includes(name.toLowerCase())
+          ? user.fullName.toLowerCase().includes(name.toLowerCase())
           : true;
 
         const matchesAttributes = attributes
-          ? user.attributes.some((attr) =>
+          ? user.personalAttributes.some((attr) =>
               attr.name.toLowerCase().includes(attributes.toLowerCase())
             )
           : true;

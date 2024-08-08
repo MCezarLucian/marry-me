@@ -1,23 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
-import Filter from "../components/filter/Filter";
-import Card from "../components/card.tsx/Card";
+import Filter from "../components/Filter/Filter";
+import Card from "../components/Card.tsx/Card";
+import useUserStore from "../store/useUserStore";
+import Spinner from "../components/spinner/Spinner";
 
-interface ParticipantListProps {
-  users: UserType[];
-  admin?: UserType;
-  sender: UserType;
-  receiver: UserType;
-}
+const ParticipantList = () => {
+  const { users, fetchUsers, user } = useUserStore((state) => ({
+    users: state.users,
+    user: state.user,
+    loading: state.loading,
+    fetchUsers: state.fetchUsers,
+  }));
 
-const ParticipantList: React.FC<ParticipantListProps> = ({
-  users,
-  sender,
-  receiver,
-  admin,
-}) => {
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
   const [openChat, setOpenChat] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
@@ -36,12 +33,19 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
     setSelectedUser(null);
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  if (users.length < 1) {
+    return <Spinner />;
+  }
   return (
     <div className="w-full flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
       <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-10 left-1/4">
-        {admin &&
-          filteredUsers.map((user) => (
+        {user?.roleType === "Admin" &&
+          users?.map((user) => (
             <Card
               key={user.id}
               user={user}
@@ -49,19 +53,21 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
               onClick={() => handleCardClick(user)}
             />
           ))}
-        {/* {!admin &&
-          filteredUsers. filter((user) => user.role).  map((user) => (
-            <Card
-              key={user.id}
-              user={user}
-              openChat={openChat}
-              onClick={() => handleCardClick(user)}
-            />
-          ))} */}
+        {user?.roleType !== "Admin" &&
+          filteredUsers
+            .filter((user) => user.roleType === "Contestant")
+            .map((user) => (
+              <Card
+                key={user.id}
+                user={user}
+                openChat={openChat}
+                onClick={() => handleCardClick(user)}
+              />
+            ))}
       </div>
       {openChat && selectedUser && (
         <Chat
-          sender={sender}
+          sender={user ? user : undefined}
           receiver={selectedUser}
           openChat={openChat}
           onClose={handleCloseChat}
