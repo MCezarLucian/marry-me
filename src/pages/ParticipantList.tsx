@@ -40,19 +40,20 @@ const ParticipantList = () => {
   if (users.length < 1) {
     return <Spinner />;
   }
+  console.log(user);
+  console.log(users);
   return (
-    <div className="w-full flex flex-col relative bg-gray-100 border-gray-200 ">
+    <div className="w-full h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
-      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-10 left-1/4">
-        {user?.roleType === "Admin" &&
-          users?.map((user) => (
-            <Card
-              key={user.id}
-              user={user}
-              openChat={openChat}
-              onClick={() => handleCardClick(user)}
-            />
-          ))}
+      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-0 left-1/4 p-8 overflow-y-scroll  h-full">
+        {users?.map((user) => (
+          <Card
+            key={user.id}
+            user={user}
+            openChat={openChat}
+            onClick={() => handleCardClick(user)}
+          />
+        ))}
         {user?.roleType !== "Admin" &&
           filteredUsers
             .filter((user) => user.roleType === "Contestant")

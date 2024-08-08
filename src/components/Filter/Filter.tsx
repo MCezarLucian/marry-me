@@ -128,7 +128,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
   ]);
 
   return (
-    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 min-h-screen bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1">
+    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 min-h-full bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1">
       <div className="mb-4 w-full">
         <input
           type="text"
