@@ -19,9 +19,9 @@ export type UserType = {
 };
 
 export type AttributesType = {
-  id: string;
-  name: string;
-  value: number;
+  attributeId: string;
+  attributeName: string;
+  value: string;
 };
 
 export type RegisterFormType = UseFormReturn<

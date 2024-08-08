@@ -30,7 +30,7 @@ const MainLayout = () => {
 
   return (
     <div className="flex min-h-screen flex-col bg-bgWhite w-full">
-      <Navbar logged admin={false} user={user ? user : undefined} />
+      <Navbar logged admin={false} user={user} />
 
       <main className="relative flex flex-1 flex-col h-full bg-slate-100">
         <div className="m-auto flex w-full flex-1 justify-center h-full">

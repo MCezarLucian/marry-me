@@ -42,7 +42,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (status === "success") {
-      navigate("/");
+      navigate("/home");
     }
   }, [navigate, status]);
 

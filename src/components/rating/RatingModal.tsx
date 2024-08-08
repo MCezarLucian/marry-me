@@ -31,8 +31,12 @@ const RatingModal = ({ attributes, isOpen, onClose }: RatingModalProps) => {
         <div className="flex flex-col gap-4">
           {attributes.map((attribute, id) => (
             <div>
-              <p>{attribute.name}</p>
-              <Rating value={attribute.value} edit attributeId={attribute.id} />
+              <p>{attribute.attributeName}</p>
+              <Rating
+                value={Number(attribute.value)}
+                edit
+                attributeId={attribute.attributeId}
+              />
             </div>
           ))}
         </div>

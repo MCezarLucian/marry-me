@@ -38,7 +38,7 @@ const Home = () => {
             story you’ve always dreamed of.
           </p>
           <Button
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/participant_list")}
             className="font-Inter w-32"
           >
             Start Now

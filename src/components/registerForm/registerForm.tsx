@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { SignupMapType } from "../../lib/types";
 import useSignUpStore from "../../store/useSignupStore";
 import { useNavigate } from "react-router-dom";
+import { errorState } from "../../lib/utils";
 
 const RegisterForm = () => {
   const { status, message, fetchSignUp, loading } = useSignUpStore((state) => ({
@@ -69,52 +70,18 @@ const RegisterForm = () => {
 
   useEffect(() => {
     const firstErrorField = Object.keys(form.formState.errors)[0];
-    errorState(firstErrorField);
-    function errorState(field: string) {
-      if (field && form.formState.isSubmitted) {
-        switch (field) {
-          case "firstName":
-            setFormState(1);
-            break;
-          case "lastName":
-            setFormState(1);
-            break;
-          case "email":
-            setFormState(1);
-            break;
-          case "phoneNumber":
-            setFormState(2);
-            break;
-          case "gender":
-            setFormState(2);
-            break;
-          case "birthdayDate":
-            setFormState(2);
-            break;
-          case "description":
-            setFormState(3);
-            break;
-          case "attributes":
-            setFormState(4);
-            break;
-          case "soulmateAttributes":
-            setFormState(5);
-            break;
-          case "password":
-            setFormState(4);
-            break;
-          case "confirmPassword":
-            setFormState(4);
-            break;
-          default:
-            break;
-        }
-      }
-    }
+    setFormState(errorState(firstErrorField, form));
+
     if (status === "success") {
       navigate("/");
     }
-  }, [form.formState.errors, form.formState.isSubmitted]);
+  }, [
+    form,
+    form.formState.errors,
+    form.formState.isSubmitted,
+    navigate,
+    status,
+  ]);
 
   return (
     <Form {...form}>

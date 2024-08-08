@@ -1,7 +1,9 @@
 import clsx from "clsx";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { UserType } from "@/lib/types";
+import { UserType } from "../../lib/types";
+import { useNavigate } from "react-router-dom";
+import { logOut } from "../../lib/utils";
 
 interface NavbarProps {
   logged?: boolean; //verify if an user is logged
@@ -10,10 +12,11 @@ interface NavbarProps {
 }
 
 function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
+  const navigate = useNavigate();
   if (admin) {
     return (
       <div className="flex flex-row gap-4 pr-4 justify-center items-center top-0">
-        <a className="hover:text-MainPink" href="/">
+        <a className="hover:text-MainPink" href="/home">
           Home
         </a>
         <a className="hover:text-MainPink" href="/requests">
@@ -23,6 +26,15 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
           Users
         </a>
         <p>{user?.fullName}</p>
+        <p
+          className="hover:text-MainPink cursor-pointer"
+          onClick={() => {
+            logOut();
+            navigate("/login");
+          }}
+        >
+          Log Out
+        </p>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
@@ -32,18 +44,24 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
   } else {
     return (
       <div className="flex flex-row gap-4 pr-4 justify-center items-center">
-        <a className="hover:text-MainPink" href="/">
+        <a className="hover:text-MainPink" href="/home">
           Home
         </a>
-        <a className="hover:text-MainPink" href="/myProfile">
-          My Profile
-        </a>
-        <a className="hover:text-MainPink" href="/contactUs">
+        <a className="hover:text-MainPink" href="/contact_us">
           Contact Us
         </a>
-        <a className="hover:text-MainPink" href="/myProfile">
+        <a className="hover:text-MainPink" href="/myprofile">
           {user?.fullName}
         </a>
+        <p
+          className="hover:text-MainPink cursor-pointer"
+          onClick={() => {
+            logOut();
+            navigate("/login");
+          }}
+        >
+          Log Out
+        </p>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
@@ -54,6 +72,10 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
 }
 
 const Navbar = ({ logged, admin, user }: NavbarProps) => {
+  if (user === null) {
+    return <></>;
+  }
+  console.log(user);
   return (
     <div className=" drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter top-0 bg-white">
       <div className="flex justify-center items-center pl-4 gap-4 font-bold">

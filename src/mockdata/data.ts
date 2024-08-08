@@ -7,12 +7,12 @@ export const users: UserType[] = [
     age: 30,
     email: "john.stone@email.com",
     personalAttributes: [
-      { id: "1", name: "Honestly", value: 0 },
-      { id: "2", name: "Loyalty", value: 0 },
+      { attributeId: "1", attributeName: "Honestly", value: "0" },
+      { attributeId: "2", attributeName: "Loyalty", value: "0" },
     ],
     searchedAttributes: [
-      { id: "1", name: "Honestly", value: 0 },
-      { id: "2", name: "Loyalty", value: 0 },
+      { attributeId: "1", attributeName: "Honestly", value: "0" },
+      { attributeId: "2", attributeName: "Loyalty", value: "0" },
     ],
     phoneNumber: "0743491829",
     gender: "male",
