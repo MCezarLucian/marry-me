@@ -23,10 +23,10 @@ const Home = () => {
         style={{ backgroundImage: 'url("images/home.png")' }}
       >
         <div
-          className="p-8 flex flex-col justify-center items-center gap-8 rounded"
+          className="p-8 flex flex-col h-auto justify-center items-center gap-8 rounded"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
-          <p className="font-Pattaya text-white text-3xl text-center">
+          <p className="font-Pattaya text-white text-2xl text-center">
             At our matrimonial site, we believe that everyone deserves a chance
             at true love and happiness. Our platform is designed to bring
             together individuals seeking meaningful relationships, guided by our

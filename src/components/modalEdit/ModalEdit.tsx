@@ -11,7 +11,7 @@ interface ModalEditProps {
 const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
   const [formData, setFormData] = useState<UserType>({
     ...user,
-    birthdayDate: new Date(user.birthdayDate),
+    dateOfBirth: new Date(user.dateOfBirth),
   });
 
   const [errors, setErrors] = useState({
@@ -98,12 +98,11 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
     e.preventDefault();
     const isValid =
       Object.values(errors).every((error) => error === "") &&
-      formData.firstName &&
-      formData.lastName &&
+      formData.fullName &&
       formData.email &&
       formData.phoneNumber &&
       formData.gender &&
-      formData.birthdayDate;
+      formData.dateOfBirth;
 
     onSave(formData);
     console.log(formData);
@@ -120,7 +119,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="text"
                 name="firstName"
-                value={formData.firstName}
+                value={formData.fullName.split(" ")[0]}
                 onChange={handleChange}
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.firstName ? "border-red-500" : ""
@@ -137,7 +136,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="text"
                 name="lastName"
-                value={formData.lastName}
+                value={formData.fullName.split(" ")[1]}
                 onChange={handleChange}
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.lastName ? "border-red-500" : ""
@@ -210,7 +209,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.birthdayDate ? "border-red-500" : ""
                 }`}
-                value={formData.birthdayDate.toISOString().split("T")[0]}
+                value={formData.dateOfBirth.toISOString().split("T")[0]}
                 onChange={handleChange}
               />
               {errors.birthdayDate && (

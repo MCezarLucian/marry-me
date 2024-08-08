@@ -14,6 +14,7 @@ import MyProfilePage from "./pages/MyProfilePage";
 import Logo from "./components/ui/logo";
 
 const router = createBrowserRouter([
+  { path: "/", element: <App /> },
   {
     path: "/",
     element: <MainLayout />,

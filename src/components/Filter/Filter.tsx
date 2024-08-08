@@ -70,12 +70,11 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
     const filterUsers = () => {
       const filtered = users.filter((user) => {
         const matchesName = name
-          ? user.firstName.toLowerCase().includes(name.toLowerCase()) ||
-            user.lastName.toLowerCase().includes(name.toLowerCase())
+          ? user.fullName.toLowerCase().includes(name.toLowerCase())
           : true;
 
         const matchesAttributes = attributes
-          ? user.attributes.some((attr) =>
+          ? user.personalAttributes.some((attr) =>
               attr.name.toLowerCase().includes(attributes.toLowerCase())
             )
           : true;
@@ -129,7 +128,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
   ]);
 
   return (
-    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 min-h-screen bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1">
+    <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 sticky min-h-full bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1 overflow-y-scroll scrollbar-hide">
       <div className="mb-4 w-full">
         <input
           type="text"

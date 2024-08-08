@@ -2,16 +2,18 @@ import { UseFormReturn } from "react-hook-form";
 
 export type UserType = {
   id: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   age: number;
   phoneNumber: string;
   gender: string;
-  birthdayDate: Date;
+  rating: number;
+  roleId: string;
+  roleType: string;
+  dateOfBirth: Date;
   description: string;
-  attributes: AttributesType[];
-  soulmateAttributes: AttributesType[];
+  personalAttributes: AttributesType[];
+  searchedAttributes: AttributesType[];
   imageUrls: string[];
   profilePicture: string;
 };

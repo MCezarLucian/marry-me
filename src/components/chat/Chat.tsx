@@ -6,7 +6,7 @@ import Message from "./Message";
 import SendMessage from "./Send";
 
 interface ChatProps {
-  sender: UserType;
+  sender?: UserType;
   receiver: UserType;
   openChat: boolean;
   onClose: () => void;
@@ -25,7 +25,7 @@ const Chat = ({ sender, receiver, onClose }: ChatProps) => {
         ) + 1;
       const newMessage = {
         id: newId,
-        senderId: Number(sender.id),
+        senderId: Number(sender?.id),
         receiverId: Number(receiver.id),
         content: message,
         timestamp: new Date(),
@@ -47,19 +47,19 @@ const Chat = ({ sender, receiver, onClose }: ChatProps) => {
 
   return (
     <div className="h-[50vh] grid grid-rows-12 w-[30vh] border border-gray-200 gap-4 bg-white fixed bottom-0 right-20">
-      <ChatHeader onClose={onClose} name={receiver.firstName} />
+      <ChatHeader onClose={onClose} name={receiver.fullName} />
       <div className="row-span-9 p-2 flex flex-col gap-1 overflow-y-scroll">
         {chatMessages
           .filter(
             (message) =>
-              message.receiverId === Number(sender.id) ||
-              message.senderId === Number(sender.id)
+              message.receiverId === Number(sender?.id) ||
+              message.senderId === Number(sender?.id)
           )
           .map((message) => (
             <Message
               key={message.id}
               message={message.content}
-              sender={Number(sender.id) === message.senderId ? true : false}
+              sender={Number(sender?.id) === message.senderId ? true : false}
             />
           ))}
         <div ref={endOfMessagesRef} />

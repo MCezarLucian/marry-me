@@ -15,6 +15,12 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+      extend: {
+        scrollbar: ["responsive"],
+      },
+    },
+    variants: {
+      scrollbar: ["responsive"],
     },
     extend: {
       colors: {
@@ -89,4 +95,17 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".scrollbar-hide": {
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          "scrollbar-width": "none",
+        },
+      };
+      addUtilities(newUtilities, ["responsive"]);
+    },
+  ],
 };

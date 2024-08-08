@@ -37,9 +37,7 @@ const RequestModal: React.FC<RequestModalProps> = ({
           <X onClick={onClose} className="cursor-pointer" />
         </div>
         <p className="text-4xl font-bold">Request</p>
-        <p className="text-4xl">
-          {user.firstName} {user.lastName}
-        </p>
+        <p className="text-4xl">{user.fullName}</p>
         <p className="w-full h-44 bg-gray-100 border border-gray-300 p-4 rounded">
           {user.description}
         </p>

@@ -29,7 +29,7 @@ const RegisterStepTwo = ({
   handleNext,
 }: RegisterStepTwoProps) => {
   return (
-    <div className="h-[80%] w-full flex justify-between flex-col">
+    <div className="h-[80%] w-full flex justify-between flex-col gap-12">
       <div className="flex flex-col justify-center gap-4">
         <FormField
           control={form.control}
