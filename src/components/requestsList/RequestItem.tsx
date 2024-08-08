@@ -28,9 +28,7 @@ const RequestItem = ({ user, isOpen, onClose }: RequestItemProps) => {
         onClick={onClose}
         className="w-full h-full grid grid-cols-6 border-b border-b-gray-200 pb-6 cursor-pointer"
       >
-        <div className="">
-          {user.firstName} {user.lastName}
-        </div>
+        <div className="">{user.fullName}</div>
         <div className="col-span-4 text-gray-800">{user.description}</div>
         <div className="flex flex-row justify-center items-start gap-4">
           <CircleX

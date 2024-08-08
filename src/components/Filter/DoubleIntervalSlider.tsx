@@ -6,6 +6,7 @@ interface DoubleIntervalSliderProps {
   max: number;
   step: number;
   onChange: (values: [number, number]) => void;
+  reset: boolean;
 }
 
 const DoubleIntervalSlider: React.FC<DoubleIntervalSliderProps> = ({
@@ -13,6 +14,7 @@ const DoubleIntervalSlider: React.FC<DoubleIntervalSliderProps> = ({
   max,
   step,
   onChange,
+  reset,
 }) => {
   const [values, setValues] = useState<[number, number]>([min, max]);
   const [inputs, setInputs] = useState<[string, string]>([
@@ -22,7 +24,18 @@ const DoubleIntervalSlider: React.FC<DoubleIntervalSliderProps> = ({
 
   useEffect(() => {
     setInputs([min.toString(), max.toString()]);
-  }, [min, max]);
+    if (reset) {
+      setValues([min, max]);
+      setInputs([min.toString(), max.toString()]);
+    }
+  }, [min, max, reset]);
+
+  /*  useEffect(() => {
+    if (reset) {
+      setValues([min, max]);
+      setInputs([min.toString(), max.toString()]);
+    }
+  }, [reset, min, max]); */
 
   const handleChange = (newValues: [number, number]) => {
     setValues(newValues);

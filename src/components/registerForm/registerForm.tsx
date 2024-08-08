@@ -65,9 +65,6 @@ const RegisterForm = () => {
 
     // console.log(fetchData);
     fetchSignUp(fetchData);
-    if (status === "success") {
-      navigate("/");
-    }
   }
 
   useEffect(() => {
@@ -114,13 +111,16 @@ const RegisterForm = () => {
         }
       }
     }
+    if (status === "success") {
+      navigate("/");
+    }
   }, [form.formState.errors, form.formState.isSubmitted]);
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className=" font-Inter text-gray-700 rounded-xl w-1/2 h-[64vh] py-14 px-24 bg-white flex flex-col gap-4"
+        className=" font-Inter text-gray-700 rounded-xl w-1/2 h-[72vh] py-14 px-24 bg-white flex flex-col gap-4"
       >
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <h1 className="text-4xl font-bold text-black">Create an Account</h1>

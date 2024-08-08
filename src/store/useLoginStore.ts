@@ -62,8 +62,6 @@ const useLoginStore = create<LoginType>((set) => ({
       );
       // console.log(response.data);
       const { status, message, data } = response.data;
-      localStorage.setItem("user", JSON.stringify(data.user));
-      console.log({ status, message, data });
       set({
         user: data.user,
         loading: false,
@@ -72,6 +70,7 @@ const useLoginStore = create<LoginType>((set) => ({
         sessionToken: data.sessionToken,
       });
       Cookies.set("sessionToken", data.sessionToken, { expires: 1 });
+      Cookies.set("id", data.user.id, { expires: 1 });
     } catch (error: any) {
       const status = error.response.data.status;
       const message = error.response.data.message;

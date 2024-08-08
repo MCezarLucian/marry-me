@@ -57,7 +57,7 @@ const RegisterStepFive = ({
   }, [value, form]);
 
   return (
-    <div className="h-[80%] w-full flex justify-between flex-col">
+    <div className="h-[80%] w-full flex justify-between flex-col gap-12">
       <FormField
         control={form.control}
         name="soulmateAttributes"

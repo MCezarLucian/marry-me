@@ -22,9 +22,7 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         <a className="hover:text-MainPink" href="/users">
           Users
         </a>
-        <p>
-          {user?.firstName} {user?.lastName}
-        </p>
+        <p>{user?.fullName}</p>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
@@ -44,7 +42,7 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
           Contact Us
         </a>
         <a className="hover:text-MainPink" href="/myProfile">
-          {user?.firstName} {user?.lastName}
+          {user?.fullName}
         </a>
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />

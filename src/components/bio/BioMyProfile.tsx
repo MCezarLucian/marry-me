@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { UserType } from "@/lib/types";
 import { Star } from "lucide-react";
-import RatingModal from "../rating/RatingModal";
 import ProfilePicture from "../imageUploader/ProfilePicture";
 import ProfilePicturePen from "../imageUploader/ProfilePicturePen";
 
@@ -55,7 +54,7 @@ const BioMyProfile = ({
             <div>
               <label>Name</label>
               <div className="mt-2 mb-3 text-base text-darkGray">
-                {user.firstName} {user.lastName}
+                {user.fullName}
               </div>
             </div>
             <div className="relative">
@@ -131,7 +130,9 @@ const BioMyProfile = ({
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="My Attributes"
               readOnly
-              value={user.attributes.map((attr) => attr.name).join(", ")}
+              value={user.personalAttributes
+                .map((attr) => attr.name)
+                .join(", ")}
             />
           </div>
           <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
@@ -140,7 +141,7 @@ const BioMyProfile = ({
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="Attributes for Soulmate"
               readOnly
-              value={user.soulmateAttributes
+              value={user.searchedAttributes
                 .map((attr) => attr.name)
                 .join(", ")}
             />
