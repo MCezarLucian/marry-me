@@ -7,9 +7,10 @@ interface BioProps {
   user: UserType;
   openChat: boolean;
   onClick: () => void;
+  userId: string;
 }
 
-const Bio = ({ user, onClick }: BioProps) => {
+const Bio = ({ user, onClick, userId }: BioProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
@@ -29,7 +30,7 @@ const Bio = ({ user, onClick }: BioProps) => {
   };
 
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="flex items-center justify-center w-full" key={userId}>
       <div className="flex flex-col items-center justify-center mt-24 w-full max-w-3xl">
         <div className="grid grid-cols-2 gap-x-12 w-full">
           <div className="text-textColorSecondary text-xl font-medium w-full">

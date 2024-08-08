@@ -40,8 +40,7 @@ const RegisterForm = () => {
     },
   });
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handlePrev = () => {
     setFormState(formState - 1);
   };
 

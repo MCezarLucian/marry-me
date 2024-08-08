@@ -19,7 +19,7 @@ const Home = () => {
         Find Your Perfect Match with Us
       </p>
       <div
-        className="h-full py-32 px-20 flex w-full bg-cover row-span-7"
+        className="h-full py-20 px-20 flex w-full bg-cover row-span-7"
         style={{ backgroundImage: 'url("images/home.png")' }}
       >
         <div
