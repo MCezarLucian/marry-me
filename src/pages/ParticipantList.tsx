@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 
 import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
-import Filter from "../components/Filter/Filter";
-import Card from "../components/Card.tsx/Card";
 import useUserStore from "../store/useUserStore";
 import Spinner from "../components/spinner/Spinner";
+import Filter from "../components/filter/Filter";
+import Card from "../components/card.tsx/Card";
 
 const ParticipantList = () => {
-  const { users, fetchUsers, user } = useUserStore((state) => ({
-    users: state.users,
-    user: state.user,
-    loading: state.loading,
-    fetchUsers: state.fetchUsers,
-  }));
+  const { users, fetchUsers, user, fetchFilteredUsers } = useUserStore(
+    (state) => ({
+      users: state.users,
+      user: state.user,
+      loading: state.loading,
+      fetchUsers: state.fetchUsers,
+      fetchFilteredUsers: state.fetchFilteredUsers,
+    })
+  );
 
   const [filteredUsers, setFilteredUsers] = useState<UserType[]>(users);
   const [openChat, setOpenChat] = useState<boolean>(false);
@@ -43,9 +46,9 @@ const ParticipantList = () => {
   console.log(user);
   console.log(users);
   return (
-    <div className="w-full h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200 ">
+    <div className="w-full overflow-y-scroll h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
-      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-0 left-1/4 p-8 overflow-y-scroll  h-full">
+      <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-0 left-1/4 p-8  h-full">
         {users?.map((user) => (
           <Card
             key={user.id}
