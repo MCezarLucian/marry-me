@@ -131,7 +131,7 @@ const BioMyProfile = ({
               placeholder="My Attributes"
               readOnly
               value={user.personalAttributes
-                .map((attr) => attr.name)
+                .map((attr) => attr.attributeName)
                 .join(", ")}
             />
           </div>
@@ -142,7 +142,7 @@ const BioMyProfile = ({
               placeholder="Attributes for Soulmate"
               readOnly
               value={user.searchedAttributes
-                .map((attr) => attr.name)
+                .map((attr) => attr.attributeName)
                 .join(", ")}
             />
           </div>

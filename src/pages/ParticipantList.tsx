@@ -4,8 +4,8 @@ import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
 import useUserStore from "../store/useUserStore";
 import Spinner from "../components/spinner/Spinner";
-import Filter from "../components/filter/Filter";
-import Card from "../components/card.tsx/Card";
+import Filter from "../components/Filter/Filter";
+import Card from "../components/Card.tsx/Card";
 
 const ParticipantList = () => {
   const { users, fetchUsers, user, fetchFilteredUsers } = useUserStore(

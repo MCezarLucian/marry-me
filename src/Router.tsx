@@ -14,28 +14,28 @@ import MyProfilePage from "./pages/MyProfilePage";
 import Logo from "./components/ui/logo";
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  {
-    path: "/",
-    element: <MainLayout />,
-    children: [
-      { path: "/", element: <App /> },
-      { path: "/requests", element: <RequestsPage /> },
-      { path: "/contact", element: <ContactForm /> },
-      { path: "/my_profile", element: <MyProfilePage /> },
-      { path: "/participant_list", element: <ParticipantList /> },
-      { path: "/individual_Page", element: <IndividualPage /> },
-    ],
-  },
   {
     path: "/",
     element: <Logo />,
     children: [
+      { path: "/", element: <App /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/forgot_password", element: <ForgotPasswordPage /> },
       { path: "/set_password", element: <SetPasswordPage /> },
       { path: "/signup_participant", element: <SignUpPageParticipant /> },
       { path: "/signup_regular", element: <SignUpPageRegular /> },
+    ],
+  },
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { path: "/home", element: <App /> },
+      { path: "/requests", element: <RequestsPage /> },
+      { path: "/contact", element: <ContactForm /> },
+      { path: "/my_profile", element: <MyProfilePage /> },
+      { path: "/participant_list", element: <ParticipantList /> },
+      { path: "/individual_Page", element: <IndividualPage /> },
     ],
   },
 ]);

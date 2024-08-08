@@ -75,7 +75,9 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
 
         const matchesAttributes = attributes
           ? user.personalAttributes.some((attr) =>
-              attr.name.toLowerCase().includes(attributes.toLowerCase())
+              attr.attributeName
+                .toLowerCase()
+                .includes(attributes.toLowerCase())
             )
           : true;
 

@@ -46,15 +46,12 @@ const useUserStore = create<UserStoreType>((set) => ({
   fetchUserById: async (id: string) => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get<UserType>(
-        `${BACKEND_API_URL}/user/index/${id}`,
-        {
-          headers: {
-            Authorization: `session_id ${Cookies.get("sessionToken")}`,
-          },
-        }
-      );
-      set({ user: response.data, loading: false });
+      const response = await axios.get(`${BACKEND_API_URL}/user/index/${id}`, {
+        headers: {
+          Authorization: `session_id ${Cookies.get("sessionToken")}`,
+        },
+      });
+      set({ user: response.data.data, loading: false });
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : "An error occurred",
