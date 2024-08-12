@@ -30,9 +30,9 @@ const useUserStore = create<UserStoreType>((set) => ({
   fetchUsers: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.get(`${BACKEND_API_URL}/user/index`, {
+      const response = await axios.get(`${BACKEND_API_URL}/user/listBy`, {
         headers: {
-          Authorization: `session_id ${Cookies.get("sessionToken")}`,
+          "x-token": `${Cookies.get("sessionToken")}`,
         },
       });
       /* console.log(response.data.data); */
@@ -51,7 +51,7 @@ const useUserStore = create<UserStoreType>((set) => ({
     try {
       const response = await axios.get(`${BACKEND_API_URL}/user/index/${id}`, {
         headers: {
-          Authorization: `session_id ${Cookies.get("sessionToken")}`,
+          "x-token": `${Cookies.get("sessionToken")}`,
         },
       });
       set({ user: response.data.data, loading: false });
@@ -68,7 +68,7 @@ const useUserStore = create<UserStoreType>((set) => ({
     try {
       const response = await axios.get(`${BACKEND_API_URL}/user/index/${id}`, {
         headers: {
-          Authorization: `session_id ${Cookies.get("sessionToken")}`,
+          "x-token": `${Cookies.get("sessionToken")}`,
         },
       });
       set({ loggedUser: response.data.data, loading: false });
@@ -89,13 +89,14 @@ const useUserStore = create<UserStoreType>((set) => ({
         query = query + category[i] + "=" + value[i];
       }
     }
+    console.log(`session_id=${Cookies.get("sessionToken")}`);
     set({ loading: true, error: null });
     try {
       const response = await axios.get(
         `${BACKEND_API_URL}/user/listBy${query}`,
         {
           headers: {
-            Authorization: `session_id ${Cookies.get("sessionToken")}`,
+            "x-token": `${Cookies.get("sessionToken")}`,
           },
         }
       );

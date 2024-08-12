@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { UserType } from "@/lib/types";
 import { Star } from "lucide-react";
 import ProfilePicture from "../imageUploader/ProfilePicture";
-import ProfilePicturePen from "../imageUploader/ProfilePicturePen";
+import { PICTURE_URL } from "../../configuration/api";
+import CoverPictureUploader from "../imageUploader/CoverPicturesUploader";
 
 interface BioProps {
   user: UserType;
@@ -26,21 +27,18 @@ const BioMyProfile = ({
     });
   };
 
+  if (!user) {
+    return <></>;
+  }
+
+  console.log(user);
+
   return (
     <div className="flex items-center justify-center w-full">
       <div className="flex flex-col items-center justify-center mb-24 mt-24 w-full max-w-3xl">
         <div className="grid grid-cols-2 gap-x-12 w-full">
-          <div className="flex flex-col items-center min-w-[360px]">
-            <div className="relative">
-              <img
-                className=" h-80 max-w-full object-cover px-7"
-                src={user.profilePicture}
-                alt="Profile Picture"
-              />
-              <div className="bottom-5 absolute right-10">
-                <ProfilePicturePen></ProfilePicturePen>
-              </div>
-            </div>
+          <div className="flex flex-col items-center w-full">
+            <ProfilePicture profilePicture={`${user.profilePicture}`} />
 
             <div className="flex flex-row text-xl gap-1 font-medium tracking-tight text-gray-900 sm:text-5xl mt-20">
               <Star className="text-darkGray fill-darkGray" />
@@ -151,17 +149,19 @@ const BioMyProfile = ({
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              {user.coverPictures.map((imageUrl, index) => (
+              {/* {user.coverPictures.map((imageUrl, index) => (
                 <div key={index} className="relative">
                   <img
                     className="w-56 h-56 object-cover"
                     src={imageUrl}
-                    alt={`User Image ${index + 1}`}
+                    alt={`UserImage ${index + 1}`}
                   />
                 </div>
-              ))}
+              ))} */}
+              <CoverPictureUploader profilePicture={user.coverPictures[0]} />
+              <CoverPictureUploader profilePicture={user.coverPictures[1]} />
+              <CoverPictureUploader profilePicture={user.coverPictures[2]} />
             </div>
-            <ProfilePicture></ProfilePicture>
           </div>
         </div>
       </div>

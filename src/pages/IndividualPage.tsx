@@ -10,8 +10,9 @@ const IndividualPage = () => {
   const [openChat, setOpenChat] = useState<boolean>(false);
   const [selectedUser, setSelectedUser] = useState<UserType | null>(null);
   const { id } = useParams();
-  const { user, fetchUserById } = useUserStore((state) => ({
+  const { user, fetchUserById, loading } = useUserStore((state) => ({
     user: state.user,
+    loading: state.loading,
     fetchUserById: state.fetchUserById,
   }));
 
@@ -32,9 +33,12 @@ const IndividualPage = () => {
   }, [fetchUserById, id]);
 
   // console.log("individual");
+  if (loading) {
+    return <Spinner />;
+  }
 
   if (!user) {
-    return <Spinner />;
+    return <></>;
   }
 
   return (
