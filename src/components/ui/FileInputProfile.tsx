@@ -24,7 +24,6 @@ import { Input } from "./input";
 import { cn } from "../../lib/utils";
 import useProfileStore from "../../store/useProfileStore";
 import Cookies from "js-cookie";
-import useCoverImagesStore from "../../store/useCoverImagesStore";
 
 type DirectionOptions = "rtl" | "ltr" | undefined;
 
@@ -41,7 +40,7 @@ type FileUploaderContextType = {
 
 const FileUploaderContext = createContext<FileUploaderContextType | null>(null);
 
-export const useFileUpload = () => {
+export const useFileUploadProfile = () => {
   const context = useContext(FileUploaderContext);
   if (!context) {
     throw new Error("useFileUpload must be used within a FileUploaderProvider");
@@ -57,7 +56,7 @@ type FileUploaderProps = {
   orientation?: "horizontal" | "vertical";
 };
 
-export const FileUploader = forwardRef<
+export const FileUploaderProfile = forwardRef<
   HTMLDivElement,
   FileUploaderProps & React.HTMLAttributes<HTMLDivElement>
 >(
@@ -75,8 +74,8 @@ export const FileUploader = forwardRef<
     },
     ref
   ) => {
-    const { fetchCoverImages } = useCoverImagesStore((state) => ({
-      fetchCoverImages: state.fetchCoverImages,
+    const { fetchProfileFicture } = useProfileStore((state) => ({
+      fetchProfileFicture: state.fetchProfilePicture,
     }));
     const [isFileTooBig, setIsFileTooBig] = useState(false);
     const [isLOF, setIsLOF] = useState(false);
@@ -107,8 +106,8 @@ export const FileUploader = forwardRef<
           return;
         }
         const id = Cookies.get("id");
-        console.log(id);
-        fetchCoverImages(id ? id : "", files);
+        // console.log(id);
+        fetchProfileFicture(id ? id : "", files[0]);
         onValueChange(files[0]);
 
         if (rejectedFiles.length > 0) {
@@ -176,13 +175,13 @@ export const FileUploader = forwardRef<
   }
 );
 
-FileUploader.displayName = "FileUploader";
+FileUploaderProfile.displayName = "FileUploader";
 
-export const FileUploaderContent = forwardRef<
+export const FileUploaderContentProfile = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ children, className, ...props }, ref) => {
-  const { orientation } = useFileUpload();
+  const { orientation } = useFileUploadProfile();
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -206,13 +205,13 @@ export const FileUploaderContent = forwardRef<
   );
 });
 
-FileUploaderContent.displayName = "FileUploaderContent";
+FileUploaderContentProfile.displayName = "FileUploaderContent";
 
-export const FileUploaderItem = forwardRef<
+export const FileUploaderItemProfile = forwardRef<
   HTMLDivElement,
   { index: number } & React.HTMLAttributes<HTMLDivElement>
 >(({ className, index, children, ...props }, ref) => {
-  const { removeFileFromSet, activeIndex, direction } = useFileUpload();
+  const { removeFileFromSet, activeIndex, direction } = useFileUploadProfile();
   const isSelected = index === activeIndex;
   return (
     <div
@@ -243,13 +242,13 @@ export const FileUploaderItem = forwardRef<
   );
 });
 
-FileUploaderItem.displayName = "FileUploaderItem";
+FileUploaderItemProfile.displayName = "FileUploaderItem";
 
-export const FileInput = forwardRef<
+export const FileInputProfile = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
-  const { dropzoneState, isFileTooBig, isLOF } = useFileUpload();
+  const { dropzoneState, isFileTooBig, isLOF } = useFileUploadProfile();
   const rootProps = isLOF ? {} : dropzoneState.getRootProps();
   return (
     <div
@@ -285,4 +284,4 @@ export const FileInput = forwardRef<
   );
 });
 
-FileInput.displayName = "FileInput";
+FileInputProfile.displayName = "FileInput";

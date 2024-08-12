@@ -38,7 +38,7 @@ const useRatingStore = create<RatingType>((set) => ({
     try {
       const response = await axios.post(`${BACKEND_API_URL}/user/${api}`, {
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "x-token": `${Cookies.get("sessionToken")}`,
         },
       });
       const { data } = response.data;
@@ -47,8 +47,6 @@ const useRatingStore = create<RatingType>((set) => ({
         attributes: data,
         loading: false,
       });
-      Cookies.set("sessionToken", data.sessionToken, { expires: 1 });
-      Cookies.set("id", data.user.id, { expires: 1 });
     } catch (error: any) {
       set({
         error: error instanceof Error ? error.message : "An error occurred",

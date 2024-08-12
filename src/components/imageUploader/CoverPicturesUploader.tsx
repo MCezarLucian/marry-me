@@ -1,21 +1,20 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import { DropzoneOptions } from "react-dropzone";
 import { Plus } from "lucide-react";
-import {
-  FileInputProfile,
-  FileUploaderContentProfile,
-  FileUploaderItemProfile,
-  FileUploaderProfile,
-} from "../ui/FileInputProfile";
+
 import { PICTURE_URL } from "../../configuration/api";
+import {
+  FileInput,
+  FileUploader,
+  FileUploaderContent,
+  FileUploaderItem,
+} from "../ui/FileInput";
 
 interface FileUploadDropzoneProps {
   profilePicture?: string;
 }
 
-const ProfilePicture = ({ profilePicture }: FileUploadDropzoneProps) => {
+const CoverPictureUploader = ({ profilePicture }: FileUploadDropzoneProps) => {
   const [files, setFiles] = useState<File | null | string>(
     profilePicture ? profilePicture : null
   );
@@ -30,23 +29,23 @@ const ProfilePicture = ({ profilePicture }: FileUploadDropzoneProps) => {
   } satisfies DropzoneOptions;
 
   return (
-    <FileUploaderProfile
+    <FileUploader
       value={files}
       onValueChange={setFiles}
       dropzoneOptions={dropzone}
       className="relative w-full h-[350px]"
     >
-      <FileInputProfile>
+      <FileInput>
         <div className="flex items-center h-[320px] justify-center p-0 rounded-md absolute top-4 w-full l-0 bg-transparent">
           <div className="w-full p-0 h-[320px] bg-slate-200 rounded-lg flex items-center justify-center">
             <Plus className="text-slate-500" />
           </div>
         </div>
-      </FileInputProfile>
-      <FileUploaderContentProfile className="grid max-h-[320px] items-center p-0">
+      </FileInput>
+      <FileUploaderContent className="grid max-h-[320px] items-center p-0">
         <div className="w-full h-full p-0">
           {files && (
-            <FileUploaderItemProfile
+            <FileUploaderItem
               index={0}
               className="w-full p-0 rounded-md overflow-hidden h-[320px]"
             >
@@ -61,12 +60,12 @@ const ProfilePicture = ({ profilePicture }: FileUploadDropzoneProps) => {
                 width={"100%"}
                 className="h-full w-full p-0 max-h-[320px]"
               />
-            </FileUploaderItemProfile>
+            </FileUploaderItem>
           )}
         </div>
-      </FileUploaderContentProfile>
-    </FileUploaderProfile>
+      </FileUploaderContent>
+    </FileUploader>
   );
 };
 
-export default ProfilePicture;
+export default CoverPictureUploader;
