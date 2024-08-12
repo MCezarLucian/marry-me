@@ -35,7 +35,7 @@ const useUserStore = create<UserStoreType>((set) => ({
           Authorization: `session_id ${Cookies.get("sessionToken")}`,
         },
       });
-      console.log(response.data.data);
+      /* console.log(response.data.data); */
       set({ users: response.data.data, loading: false });
     } catch (error: any) {
       // console.log(error.response.data);
@@ -99,9 +99,9 @@ const useUserStore = create<UserStoreType>((set) => ({
           },
         }
       );
-      // console.log(response);
+      /* console.log(response); */
       set({
-        user: response.data.data,
+        users: response.data.data,
         loading: false,
         status: response.data.status,
       });

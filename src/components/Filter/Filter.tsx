@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { UserType } from "../../lib/types";
 import DoubleIntervalSlider from "./DoubleIntervalSlider";
 
 interface FilterProps {
   users: UserType[];
   admin?: boolean;
-  onFilterChange: (filteredUsers: UserType[]) => void;
+  fetchFilteredUsers: (category: string[], value: string[]) => Promise<void>;
 }
 
-const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
+const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const [name, setName] = useState<string>("");
   const [attributes, setAttributes] = useState<string>("");
   const [selectedAgeRanges, setSelectedAgeRanges] = useState<string[]>([]);
   const [selectedGenders, setSelectedGenders] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [triggerSearch, setTriggerSearch] = useState<boolean>(false);
   const [range, setRange] = useState<[number, number]>([18, 110]);
   const [sliderChanged, setSliderChanged] = useState<boolean>(false);
   const [resetSlider, setResetSlider] = useState<boolean>(false);
+
+  const ageRanges = ["18 > 25", "25 > 30", "30 > 40", "40 > 50", "50 > 70"];
+  const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
     setRange(values);
@@ -61,73 +63,47 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
     );
   };
 
-  const ageRanges = ["18 > 25", "25 > 30", "30 > 40", "40 > 50", "50 > 70"];
-  const userTypes = ["participant", "regular"];
+  const constructQueryParams = () => {
+    const categories: string[] = [];
+    const values: string[] = [];
 
-  useEffect(() => {
-    if (!triggerSearch) return;
+    if (name) {
+      categories.push("full_name");
+      values.push(name);
+    }
 
-    const filterUsers = () => {
-      const filtered = users.filter((user) => {
-        const matchesName = name
-          ? user.fullName.toLowerCase().includes(name.toLowerCase())
-          : true;
+    if (attributes) {
+      categories.push("searched_attributes");
+      values.push(attributes);
+    }
 
-        const matchesAttributes = attributes
-          ? user.personalAttributes.some((attr) =>
-              attr.attributeName
-                .toLowerCase()
-                .includes(attributes.toLowerCase())
-            )
-          : true;
+    if (selectedGenders.length > 0) {
+      categories.push("gender");
+      values.push(selectedGenders.toString());
+    }
 
-        const age = user.age;
-        const matchesAgeRange = selectedAgeRanges.length
-          ? selectedAgeRanges.some((range) => {
-              const [min, max] = range.split(" > ").map(Number);
-              return age >= min && age < max;
-            })
-          : sliderChanged
-          ? age >= range[0] && age <= range[1]
-          : true;
+    if (selectedAgeRanges.length > 0) {
+      categories.push("age");
+      values.push(selectedAgeRanges.join(","));
+    } else if (sliderChanged) {
+      categories.push("minAge");
+      values.push(range[0].toString());
+      categories.push("maxAge");
+      values.push(range[1].toString());
+    }
 
-        const matchesGender = selectedGenders.length
-          ? selectedGenders.includes(user.gender)
-          : true;
+    if (admin && selectedTypes.length > 0) {
+      categories.push("type");
+      values.push(selectedTypes.join(","));
+    }
 
-        /*  const matchesType = admin
-          ? selectedTypes.length
-            ? selectedTypes.includes(user.type)
-            : true
-          : true; */
+    return { categories, values };
+  };
 
-        return (
-          matchesName &&
-          matchesAttributes &&
-          matchesAgeRange &&
-          matchesGender /* &&
-          matchesType */
-        );
-      });
-
-      onFilterChange(filtered);
-    };
-
-    filterUsers();
-    setTriggerSearch(false);
-  }, [
-    triggerSearch,
-    name,
-    attributes,
-    selectedAgeRanges,
-    selectedGenders,
-    selectedTypes,
-    range,
-    sliderChanged,
-    users,
-    admin,
-    onFilterChange,
-  ]);
+  const handleSearch = () => {
+    const { categories, values } = constructQueryParams();
+    fetchFilteredUsers(categories, values);
+  };
 
   if (!users) {
     return <></>;
@@ -162,8 +138,8 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
             <input
               type="checkbox"
               value="male"
-              checked={selectedGenders.includes("male")}
-              onChange={() => handleGenderChange("male")}
+              checked={selectedGenders.includes("m")}
+              onChange={() => handleGenderChange("m")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
             />
             Male
@@ -172,8 +148,8 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
             <input
               type="checkbox"
               value="female"
-              checked={selectedGenders.includes("female")}
-              onChange={() => handleGenderChange("female")}
+              checked={selectedGenders.includes("f")}
+              onChange={() => handleGenderChange("f")}
               className="mr-2 w-4 h-4"
             />
             Female
@@ -208,7 +184,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
             step={1}
             onChange={handleSliderChange}
             reset={resetSlider}
-          ></DoubleIntervalSlider>
+          />
         </div>
       </div>
       {admin && (
@@ -236,7 +212,7 @@ const Filter = ({ users, admin, onFilterChange }: FilterProps) => {
         </div>
       )}
       <button
-        onClick={() => setTriggerSearch(true)}
+        onClick={handleSearch}
         className="bg-gradient-to-r from-customStart to-customEnd text-white font-bold py-2 px-4 rounded mb-6"
       >
         Search

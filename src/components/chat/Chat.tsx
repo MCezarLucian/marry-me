@@ -46,7 +46,7 @@ const Chat = ({ sender, receiver, onClose }: ChatProps) => {
   }, [chatMessages]);
 
   return (
-    <div className="h-[50vh] grid grid-rows-12 w-[30vh] border border-gray-200 gap-4 bg-white fixed bottom-0 right-20">
+    <div className="h-[50vh] grid grid-rows-12 w-[40vh] border border-gray-200 gap-4 bg-white fixed bottom-0 right-20">
       <ChatHeader onClose={onClose} name={receiver.fullName} />
       <div className="row-span-9 p-2 flex flex-col gap-1 overflow-y-scroll">
         {chatMessages
