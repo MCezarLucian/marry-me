@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { UserType } from "@/lib/types";
-import { Star } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { UserType } from "../../lib/types";
+import { Star, StarIcon } from "lucide-react";
 import RatingModal from "../rating/RatingModal";
+import Spinner from "../spinner/Spinner";
+import useRatingStore from "../../store/useRatingStore";
+import { PICTURE_URL } from "../../configuration/api";
 
 interface BioProps {
   user: UserType;
@@ -13,6 +16,10 @@ interface BioProps {
 const Bio = ({ user, onClick, userId }: BioProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const { initializeAttributes } = useRatingStore((state) => ({
+    initializeAttributes: state.initializeAttributes,
+  }));
+  const [rating, setRating] = useState(user.rating);
 
   const onClose = () => {
     setIsOpen(false);
@@ -28,6 +35,19 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
       setTimeout(() => setCopiedField(null), 3000);
     });
   };
+
+  useEffect(() => {
+    if (user === null) {
+      return;
+    }
+    initializeAttributes(user.personalAttributes);
+    setRating(user.rating);
+    // console.log(user);
+  }, [initializeAttributes, user]);
+
+  if (user === null) {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex items-center justify-center w-full" key={userId}>
@@ -88,21 +108,31 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
               Send Message
             </button>
           </div>
-          <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col items-center w-full rounded">
             <img
-              className=" h-80 max-w-full object-cover px-7"
-              src={user.profilePicture}
-              alt="Profile Picture"
+              className=" h-80 max-w-full object-cover px-7 rounded overflow-hidden"
+              src={
+                user.profilePicture
+                  ? `${PICTURE_URL}${user.profilePicture}`
+                  : "images/pp.png"
+              }
+              alt="profile_picture"
             />
             <div
               className="flex flex-row text-xl gap-1 font-medium tracking-tight text-gray-900 sm:text-5xl mt-20"
               onClick={onOpen}
             >
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
+              {[...Array(5)].map((_, index) => (
+                <StarIcon
+                  key={index}
+                  className={`w-6 h-6 cursor-pointer ${
+                    index < rating ? "text-yellow-400" : "text-gray-400"
+                  }`}
+                  fill={index < rating ? "#f59e0b" : "none"}
+                  stroke={index < rating ? "none" : "#9ca3af"}
+                />
+              ))}
+              <p className="text-lg">{`(${rating})`}</p>
             </div>
           </div>
         </div>
@@ -134,7 +164,7 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
               placeholder="Attributes for Soulmate"
               readOnly
               value={user.searchedAttributes
-                .map((attr) => attr.attributeName)
+                ?.map((attr) => attr.attributeName)
                 .join(", ")}
             />
           </div>
@@ -143,24 +173,21 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              {user.imageUrls.map((imageUrl, index) => (
-                <div key={index} className="relative">
-                  <img
-                    className="w-56 h-56 object-cover"
-                    src={imageUrl}
-                    alt={`User Image ${index + 1}`}
-                  />
-                </div>
-              ))}
+              {user.coverPictures &&
+                user.coverPictures.map((imageUrl, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      className="w-56 h-56 object-cover"
+                      src={`${PICTURE_URL}${imageUrl}`}
+                      alt={`UserImage ${index + 1}`}
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </div>
       </div>
-      <RatingModal
-        onClose={onClose}
-        isOpen={isOpen}
-        attributes={user.personalAttributes}
-      />
+      <RatingModal onClose={onClose} isOpen={isOpen} />
     </div>
   );
 };

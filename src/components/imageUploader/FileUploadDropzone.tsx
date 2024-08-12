@@ -33,10 +33,10 @@ const FileUploadDropzone = ({ user }: FileUploadDropzoneProps) => {
 
   useEffect(() => {
     const convertUrlsToFiles = async () => {
-      if (user?.imageUrls) {
+      if (user?.coverPictures) {
         try {
           const convertedFiles = await Promise.all(
-            user.imageUrls.map((url, index) =>
+            user.coverPictures.map((url, index) =>
               urlToFile(url, `image${index}.jpg`, "image/jpeg")
             )
           );

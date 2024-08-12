@@ -1,10 +1,9 @@
-import { AttributesType } from "@/lib/types";
 import { X } from "lucide-react";
 import React from "react";
 import Rating from "./Rating";
+import useRatingStore from "../../store/useRatingStore";
 
 interface RatingModalProps {
-  attributes: AttributesType[];
   isOpen: boolean;
   onClose: () => void;
 }
@@ -13,8 +12,14 @@ const handleModalClick = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-const RatingModal = ({ attributes, isOpen, onClose }: RatingModalProps) => {
+const RatingModal = ({ isOpen, onClose }: RatingModalProps) => {
+  const { attributes } = useRatingStore((state) => ({
+    attributes: state.attributes,
+  }));
+  console.log(attributes);
+
   if (!isOpen) return null;
+
   return (
     <div
       className="fixed inset-0 z-10 flex items-center justify-center bg-opacity-50"
@@ -29,8 +34,8 @@ const RatingModal = ({ attributes, isOpen, onClose }: RatingModalProps) => {
         </div>
         <p className="text-4xl font-bold">Rating</p>
         <div className="flex flex-col gap-4">
-          {attributes.map((attribute, id) => (
-            <div>
+          {attributes.map((attribute) => (
+            <div key={attribute.attributeId}>
               <p>{attribute.attributeName}</p>
               <Rating
                 value={Number(attribute.value)}

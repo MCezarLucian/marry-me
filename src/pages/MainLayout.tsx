@@ -3,34 +3,33 @@ import Footer from "../components/footer/Footer";
 import Navbar from "../components/navbar/Navbar";
 import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
-import Spinner from "../components/spinner/Spinner";
 import { useEffect } from "react";
 
 const MainLayout = () => {
   const navigate = useNavigate();
-  const { user, fetchUserById } = useUserStore((state) => ({
-    user: state.user,
-    loading: state.loading,
-    fetchUserById: state.fetchUserById,
+  const { loggedUser, setLoggedUser } = useUserStore((state) => ({
+    loggedUser: state.loggedUser,
+    setLoggedUser: state.setLoggedUser,
   }));
   const token = Cookies.get("sessionToken");
   const userId = Cookies.get("id");
 
   useEffect(() => {
-    if (!token) {
+    if (!token || token === "undefined") {
       navigate("/login");
-    } else {
-      fetchUserById(userId ? userId : "");
     }
-  }, [fetchUserById, navigate, token, userId]);
+    if (userId) {
+      setLoggedUser(userId);
+    }
+  }, [navigate, setLoggedUser, token, userId]);
 
-  if (user === null) {
-    return <Spinner />;
+  if (loggedUser === null) {
+    return null;
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-bgWhite w-full">
-      <Navbar logged admin={false} user={user} />
+      <Navbar logged admin={false} user={loggedUser ? loggedUser : undefined} />
 
       <main className="relative flex flex-1 flex-col h-full bg-slate-100">
         <div className="m-auto flex w-full flex-1 justify-center h-full">
