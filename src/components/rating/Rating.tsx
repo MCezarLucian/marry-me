@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Star as StarIcon } from "lucide-react";
+import useRatingStore from "../../store/useRatingStore";
+import useUserStore from "../../store/useUserStore";
 
 interface RatingProps {
   attributeId?: string;
@@ -8,6 +10,14 @@ interface RatingProps {
 }
 
 const Rating: React.FC<RatingProps> = ({ value, edit, attributeId }) => {
+  const { loggedUser } = useUserStore((state) => ({
+    loggedUser: state.loggedUser,
+  }));
+  const { fetchRateAttribute, attributes } = useRatingStore((state) => ({
+    fetchRateAttribute: state.fetchRateAttribute,
+    attributes: state.attributes,
+  }));
+
   const [rating, setRating] = useState(value);
   const [hover, setHover] = useState<number | null>(null);
 
@@ -20,9 +30,28 @@ const Rating: React.FC<RatingProps> = ({ value, edit, attributeId }) => {
   };
 
   const handleClick = (index: number) => {
-    setRating(index + 1);
-    //api
+    const newRating = index + 1;
+    // setRating(newRating);
+
+    if (loggedUser && attributeId) {
+      fetchRateAttribute(loggedUser.id, attributeId, newRating.toString());
+    }
   };
+
+  useEffect(() => {
+    if (attributes) {
+      setRating(
+        Number(
+          attributes.find((attribute) => attribute.attributeId === attributeId)
+            ?.value
+        )
+      );
+    }
+  }, [attributeId, attributes]);
+
+  if (!attributeId || !loggedUser) {
+    return <></>;
+  }
 
   return (
     <div className="flex flex-row">

@@ -10,11 +10,14 @@ interface CardProps {
 }
 
 const Card = ({ user, onClick }: CardProps) => {
+  if (user === null) {
+    return <></>;
+  }
   return (
     <div className="flex flex-col relative">
       <Link
         key={user.id}
-        to={`/individual-page/${user.id}`}
+        to={`/individual_page/${user.id}`}
         className="flex flex-col rounded-md max-w-64 gap-2 px-16 py-12 pt-9 bg-white justify-center relative items-center font-Inter drop-shadow-md"
       >
         <CircleUser className="w-24 h-24" color="#1E5EFF" />

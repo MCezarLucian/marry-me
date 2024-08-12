@@ -38,13 +38,11 @@ const ParticipantList = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, [fetchUsers]);
+  }, [fetchUsers, users.length]);
 
-  if (users.length < 1) {
+  if (!users) {
     return <Spinner />;
   }
-  console.log(user);
-  console.log(users);
   return (
     <div className="w-full overflow-y-scroll h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200 ">
       <Filter users={users} onFilterChange={handleFilterChange} />
@@ -69,14 +67,14 @@ const ParticipantList = () => {
               />
             ))}
       </div>
-      {openChat && selectedUser && (
+      {/* {openChat && selectedUser && (
         <Chat
           sender={user ? user : undefined}
           receiver={selectedUser}
           openChat={openChat}
           onClose={handleCloseChat}
         />
-      )}
+      )} */}
     </div>
   );
 };

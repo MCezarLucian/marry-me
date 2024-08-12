@@ -14,7 +14,7 @@ export type UserType = {
   description: string;
   personalAttributes: AttributesType[];
   searchedAttributes: AttributesType[];
-  imageUrls: string[];
+  coverPictures: string[];
   profilePicture: string;
 };
 
