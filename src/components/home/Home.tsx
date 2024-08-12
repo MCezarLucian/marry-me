@@ -19,11 +19,11 @@ const Home = () => {
         Find Your Perfect Match with Us
       </p>
       <div
-        className="h-full py-20 px-20 flex w-full bg-cover row-span-7"
+        className="h-full py-20 flex w-full bg-cover row-span-7 justify-center items-center"
         style={{ backgroundImage: 'url("images/home.png")' }}
       >
         <div
-          className="p-8 flex flex-col h-auto justify-center items-center gap-8 rounded"
+          className="p-8 flex flex-col h-auto justify-center items-center gap-8 rounded max-w-6xl"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
           <p className="font-Pattaya text-white text-2xl text-center">

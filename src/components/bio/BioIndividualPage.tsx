@@ -53,7 +53,7 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
     <div className="flex items-center justify-center w-full" key={userId}>
       <div className="flex flex-col items-center justify-center mt-24 w-full max-w-3xl">
         <div className="grid grid-cols-2 gap-x-12 w-full">
-          <div className="text-textColorSecondary text-xl font-medium w-full">
+          <div className="text-textColorSecondary text-xl font-medium min-w-[360px]">
             <div>
               <label>Name</label>
               <div className="mt-2 mb-3 text-base text-darkGray">

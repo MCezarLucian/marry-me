@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Star, CircleUser } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import { UserType } from "@/lib/types";
 import { Link } from "react-router-dom";
+import { PICTURE_URL } from "../../configuration/api";
 
 interface CardProps {
   user: UserType;
@@ -10,9 +11,12 @@ interface CardProps {
 }
 
 const Card = ({ user, onClick }: CardProps) => {
+  const [rating, setRating] = React.useState(user.rating);
+
   if (user === null) {
     return <></>;
   }
+  const [firstName, lastName] = user.fullName.split(" ");
   return (
     <div className="flex flex-col relative">
       <Link
@@ -20,16 +24,32 @@ const Card = ({ user, onClick }: CardProps) => {
         to={`/individual_page/${user.id}`}
         className="flex flex-col rounded-md max-w-64 gap-2 px-16 py-12 pt-9 bg-white justify-center relative items-center font-Inter drop-shadow-md"
       >
-        <CircleUser className="w-24 h-24" color="#1E5EFF" />
+        <div className="border rounded-full overflow-hidden w-20 h-20 flex items-center justify-center mb-5">
+          <img
+            src={
+              user.profilePicture
+                ? `${PICTURE_URL}${user.profilePicture}`
+                : "images/pp.png"
+            }
+            alt={`${user.fullName}'s profile`}
+            className="object-cover w-full h-full"
+          />
+        </div>
         <div className="flex flex-row text-xl gap-1 font-medium tracking-tight text-gray-900 sm:text-5xl">
-          <Star className="text-darkGray fill-darkGray" />
-          <Star className="text-darkGray fill-darkGray" />
-          <Star className="text-darkGray fill-darkGray" />
-          <Star className="text-darkGray fill-darkGray" />
-          <Star className="text-darkGray fill-darkGray" />
+          {[...Array(5)].map((_, index) => (
+            <StarIcon
+              key={index}
+              className={`w-6 h-6 cursor-pointer ${
+                index < rating ? "text-yellow-400" : "text-gray-400"
+              }`}
+              fill={index < rating ? "#f59e0b" : "none"}
+              stroke={index < rating ? "none" : "#9ca3af"}
+            />
+          ))}
         </div>
         <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
-          <div className="mr-1">{user.fullName}</div>
+          <div className="mr-1">{firstName}</div>
+          {lastName && <div>{lastName}</div>}
         </div>
         <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
           {user.age} years old

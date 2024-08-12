@@ -48,7 +48,7 @@ const BioMyProfile = ({
               <Star className="text-darkGray fill-darkGray" />
             </div>
           </div>
-          <div className="text-textColorSecondary text-xl font-medium w-full">
+          <div className="text-textColorSecondary text-xl font-medium min-w-[360px]">
             <div>
               <label>Name</label>
               <div className="mt-2 mb-3 text-base text-darkGray">
