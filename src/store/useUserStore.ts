@@ -7,6 +7,7 @@ import { create } from "zustand";
 interface UserStoreType {
   users: UserType[];
   status: string | null;
+  loggedUser: UserType | null;
   user: UserType | null;
   filteredUsers: UserType[];
   loading: boolean;
@@ -14,10 +15,12 @@ interface UserStoreType {
   fetchUsers: () => Promise<void>;
   fetchUserById: (id: string) => Promise<void>;
   fetchFilteredUsers: (category: string[], value: string[]) => Promise<void>;
+  setLoggedUser: (id: string) => Promise<void>;
 }
 
 const useUserStore = create<UserStoreType>((set) => ({
   users: [],
+  loggedUser: null,
   filteredUsers: [],
   user: null,
   loading: false,
@@ -52,6 +55,23 @@ const useUserStore = create<UserStoreType>((set) => ({
         },
       });
       set({ user: response.data.data, loading: false });
+    } catch (error) {
+      set({
+        error: error instanceof Error ? error.message : "An error occurred",
+        loading: false,
+      });
+    }
+  },
+
+  setLoggedUser: async (id: string) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axios.get(`${BACKEND_API_URL}/user/index/${id}`, {
+        headers: {
+          Authorization: `session_id ${Cookies.get("sessionToken")}`,
+        },
+      });
+      set({ loggedUser: response.data.data, loading: false });
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : "An error occurred",

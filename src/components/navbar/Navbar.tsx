@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { UserType } from "../../lib/types";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../lib/utils";
+import Spinner from "../spinner/Spinner";
 
 interface NavbarProps {
   logged?: boolean; //verify if an user is logged
@@ -13,6 +14,7 @@ interface NavbarProps {
 
 function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
   const navigate = useNavigate();
+
   if (admin) {
     return (
       <div className="flex flex-row gap-4 pr-4 justify-center items-center top-0">
@@ -72,8 +74,8 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
 }
 
 const Navbar = ({ logged, admin, user }: NavbarProps) => {
-  if (user === null) {
-    return <></>;
+  if (!user) {
+    return <Spinner />;
   }
   return (
     <div className=" drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter top-0 bg-white">

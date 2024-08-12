@@ -30,7 +30,7 @@ const BioMyProfile = ({
     <div className="flex items-center justify-center w-full">
       <div className="flex flex-col items-center justify-center mb-24 mt-24 w-full max-w-3xl">
         <div className="grid grid-cols-2 gap-x-12 w-full">
-          <div className="flex flex-col items-center w-full">
+          <div className="flex flex-col items-center min-w-[360px]">
             <div className="relative">
               <img
                 className=" h-80 max-w-full object-cover px-7"
@@ -50,7 +50,7 @@ const BioMyProfile = ({
               <Star className="text-darkGray fill-darkGray" />
             </div>
           </div>
-          <div className="text-textColorSecondary text-xl font-medium w-full">
+          <div className="text-textColorSecondary text-xl font-medium min-w-[360px]">
             <div>
               <label>Name</label>
               <div className="mt-2 mb-3 text-base text-darkGray">
@@ -151,7 +151,7 @@ const BioMyProfile = ({
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              {user.imageUrls.map((imageUrl, index) => (
+              {user.coverPictures.map((imageUrl, index) => (
                 <div key={index} className="relative">
                   <img
                     className="w-56 h-56 object-cover"

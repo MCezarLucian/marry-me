@@ -18,7 +18,7 @@ export const users: UserType[] = [
     gender: "male",
     description: "This is John Stone description",
     dateOfBirth: new Date(),
-    imageUrls: [
+    coverPictures: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTboK1wZUZPH3YbcQ-CKGZ5CNawKdSXs4c7jQ&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR02ArPIOrwQDvzDoXHcho4hRHt5KGT8G1rEw&s",
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWGgKnt4k7cn5fjg0hrhdPqSg8hC_UiWnC1w&s",

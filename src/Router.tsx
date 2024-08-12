@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       { path: "/contact", element: <ContactForm /> },
       { path: "/my_profile", element: <MyProfilePage /> },
       { path: "/participant_list", element: <ParticipantList /> },
-      { path: "/individual_Page", element: <IndividualPage /> },
+      { path: "/individual_page/:id", element: <IndividualPage /> },
     ],
   },
 ]);

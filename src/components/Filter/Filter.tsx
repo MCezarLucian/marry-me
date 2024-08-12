@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { UserType } from "../../lib/types";
 import DoubleIntervalSlider from "./DoubleIntervalSlider";
 
@@ -19,7 +19,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const [resetSlider, setResetSlider] = useState<boolean>(false);
 
   const ageRanges = ["18 > 25", "25 > 30", "30 > 40", "40 > 50", "50 > 70"];
-  const userTypes = ["participant", "regular"];
+  const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
     setRange(values);
@@ -73,17 +73,17 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (attributes) {
-      categories.push("searchedAttributes");
+      categories.push("searched_attributes");
       values.push(attributes);
     }
 
     if (selectedGenders.length > 0) {
       categories.push("gender");
-      values.push("F");
+      values.push(selectedGenders.toString());
     }
 
     if (selectedAgeRanges.length > 0) {
-      categories.push("ageRanges");
+      categories.push("age");
       values.push(selectedAgeRanges.join(","));
     } else if (sliderChanged) {
       categories.push("minAge");
@@ -104,6 +104,10 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     const { categories, values } = constructQueryParams();
     fetchFilteredUsers(categories, values);
   };
+
+  if (!users) {
+    return <></>;
+  }
 
   return (
     <div className="flex flex-col px-4 py-10 top-0 font-Inter left-0 sticky min-h-full bg-backgroundGray max-w-64 border-r border-r-darkGray border-r-1 overflow-y-scroll scrollbar-hide">
@@ -134,8 +138,8 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
             <input
               type="checkbox"
               value="male"
-              checked={selectedGenders.includes("male")}
-              onChange={() => handleGenderChange("male")}
+              checked={selectedGenders.includes("m")}
+              onChange={() => handleGenderChange("m")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
             />
             Male
@@ -144,8 +148,8 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
             <input
               type="checkbox"
               value="female"
-              checked={selectedGenders.includes("female")}
-              onChange={() => handleGenderChange("female")}
+              checked={selectedGenders.includes("f")}
+              onChange={() => handleGenderChange("f")}
               className="mr-2 w-4 h-4"
             />
             Female

@@ -34,14 +34,14 @@ const ParticipantList = () => {
   };
 
   useEffect(() => {
-    fetchFilteredUsers(category, values);
     fetchUsers();
-  }, [fetchUsers, fetchFilteredUsers, setCategory, setValue]);
+    console.log("Category and Values:", category, values);
+    fetchFilteredUsers(category, values);
+  }, [fetchUsers, fetchFilteredUsers]);
 
-  if (users.length < 1) {
+  if (!users) {
     return <Spinner />;
   }
-
   return (
     <div className="w-full overflow-y-scroll h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200s">
       <Filter users={users} fetchFilteredUsers={fetchFilteredUsers} />
