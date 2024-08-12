@@ -75,7 +75,6 @@ const Navbar = ({ logged, admin, user }: NavbarProps) => {
   if (user === null) {
     return <></>;
   }
-  console.log(user);
   return (
     <div className=" drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter top-0 bg-white">
       <Link
