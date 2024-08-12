@@ -4,17 +4,17 @@ import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
 import useUserStore from "../store/useUserStore";
 import Spinner from "../components/spinner/Spinner";
-import Filter from "../components/Filter/Filter";
-import Card from "../components/Card.tsx/Card";
+import Filter from "../components/filter/Filter";
+import Card from "../components/card.tsx/Card";
 
 const ParticipantList = () => {
-  const { users, fetchUsers, user, fetchFilteredUsers } = useUserStore(
+  const { users, fetchUsers, user /* fetchFilteredUsers */ } = useUserStore(
     (state) => ({
       users: state.users,
       user: state.user,
       loading: state.loading,
       fetchUsers: state.fetchUsers,
-      fetchFilteredUsers: state.fetchFilteredUsers,
+      /* fetchFilteredUsers: state.fetchFilteredUsers, */
     })
   );
 

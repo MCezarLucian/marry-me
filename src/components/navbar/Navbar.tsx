@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { UserType } from "../../lib/types";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../lib/utils";
 import Spinner from "../spinner/Spinner";
 
@@ -49,10 +49,10 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         <a className="hover:text-MainPink" href="/home">
           Home
         </a>
-        <a className="hover:text-MainPink" href="/contact_us">
+        <a className="hover:text-MainPink" href="/contact">
           Contact Us
         </a>
-        <a className="hover:text-MainPink" href="/myprofile">
+        <a className="hover:text-MainPink" href="/my_profile">
           {user?.fullName}
         </a>
         <p
@@ -79,10 +79,13 @@ const Navbar = ({ logged, admin, user }: NavbarProps) => {
   }
   return (
     <div className=" drop-shadow-xl h-[68px] flex flex-row justify-between font-Inter top-0 bg-white">
-      <div className="flex justify-center items-center pl-4 gap-4 font-bold">
+      <Link
+        to={`/home`}
+        className="flex justify-center items-center pl-4 gap-4 font-bold"
+      >
         <img src="images/logo.png" alt="logo" />
         <p className="text-3xl">Marry Me</p>
-      </div>
+      </Link>
       <div className={clsx(logged ? "" : "hidden", "flex justify-center")}>
         {ShowMenu(admin, user)}
       </div>
