@@ -50,7 +50,7 @@ const ParticipantList = () => {
             onClick={() => handleCardClick(user)}
           />
         ))}
-        {user?.roleType !== "Admin" &&
+        {/* {user?.roleType !== "Admin" &&
           Array.isArray(users) &&
           users
             .filter((user) => user.roleType === "Contestant")
@@ -61,7 +61,7 @@ const ParticipantList = () => {
                 openChat={openChat}
                 onClick={() => handleCardClick(user)}
               />
-            ))}
+            ))} */}
       </div>
       {openChat && selectedUser && (
         <Chat
