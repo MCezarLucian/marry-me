@@ -111,7 +111,11 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
           <div className="flex flex-col items-center w-full rounded">
             <img
               className=" h-80 max-w-full object-cover px-7 rounded overflow-hidden"
-              src={user.profilePicture ? user.profilePicture : "images/pp.png"}
+              src={
+                user.profilePicture
+                  ? `${PICTURE_URL}${user.profilePicture}`
+                  : "images/pp.png"
+              }
               alt="profile_picture"
             />
             <div

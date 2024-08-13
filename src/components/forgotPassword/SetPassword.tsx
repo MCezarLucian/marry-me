@@ -14,8 +14,20 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { PasswordChangeSchema } from "../../schemas/PasswordResetSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useForgotPasswordStore from "../../store/useForgotPasswordStore";
+import { useParams } from "react-router-dom";
+import Spinner from "../spinner/Spinner";
 
 const SetPassword = () => {
+  const { data, status, loading, fetchChangePassword } = useForgotPasswordStore(
+    (state) => ({
+      data: state.data,
+      status: state.status,
+      loading: state.loading,
+      fetchChangePassword: state.fetchChangePassword,
+    })
+  );
+  const { token } = useParams();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfimPassword, setShowConfirmPassword] = useState(false);
   const form = useForm<z.infer<typeof PasswordChangeSchema>>({
@@ -26,7 +38,11 @@ const SetPassword = () => {
     },
   });
   const onSubmit = (values: z.infer<typeof PasswordChangeSchema>) => {
-    //api
+    fetchChangePassword(
+      values.password,
+      values.confirmPassword,
+      token ? token : ""
+    );
   };
 
   return (
@@ -110,6 +126,9 @@ const SetPassword = () => {
               <Button type="submit" className="w-full">
                 Confirm password
               </Button>
+              {loading && <Spinner />}
+              {status === "success" && <p className="text-green-600">{data}</p>}
+              {status === "failure" && <p className="text-red-600">{data}</p>}
             </div>
           </div>
         </form>
