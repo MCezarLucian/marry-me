@@ -33,6 +33,8 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       : [...selectedAgeRanges, range];
 
     setSelectedAgeRanges(newSelectedRanges);
+    setSliderChanged(false);
+    setRange([18, 110]);
 
     if (newSelectedRanges.length === 1) {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
@@ -63,29 +65,40 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     );
   };
 
+  const handleSearch = () => {
+    const { categories, values } = constructQueryParams();
+    console.log("Search Params:", { categories, values });
+    fetchFilteredUsers(categories, values);
+  };
+
   const constructQueryParams = () => {
     const categories: string[] = [];
     const values: string[] = [];
 
     if (name) {
+      console.log("Filtering by name:", name);
       categories.push("full_name");
       values.push(name);
     }
 
     if (attributes) {
-      categories.push("searched_attributes");
+      console.log("Filtering by attributes:", attributes);
+      categories.push("attributes");
       values.push(attributes);
     }
 
     if (selectedGenders.length > 0) {
+      console.log("Filtering by gender:", selectedGenders);
       categories.push("gender");
       values.push(selectedGenders.toString());
     }
 
     if (selectedAgeRanges.length > 0) {
+      console.log("Filtering by age range:", selectedAgeRanges);
       categories.push("age");
       values.push(selectedAgeRanges.join(","));
     } else if (sliderChanged) {
+      console.log("Filtering by age slider:", range);
       categories.push("minAge");
       values.push(range[0].toString());
       categories.push("maxAge");
@@ -93,16 +106,12 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (admin && selectedTypes.length > 0) {
+      console.log("Filtering by type:", selectedTypes);
       categories.push("type");
       values.push(selectedTypes.join(","));
     }
 
     return { categories, values };
-  };
-
-  const handleSearch = () => {
-    const { categories, values } = constructQueryParams();
-    fetchFilteredUsers(categories, values);
   };
 
   if (!users) {
@@ -137,7 +146,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="male"
+              value="m"
               checked={selectedGenders.includes("m")}
               onChange={() => handleGenderChange("m")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
@@ -147,7 +156,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 text-base flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="female"
+              value="f"
               checked={selectedGenders.includes("f")}
               onChange={() => handleGenderChange("f")}
               className="mr-2 w-4 h-4"

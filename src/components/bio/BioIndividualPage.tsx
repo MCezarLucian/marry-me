@@ -168,23 +168,25 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
                 .join(", ")}
             />
           </div>
-          <div className="w-full">
-            <label className="text-textColorSecondary text-xl font-medium">
-              Images
-            </label>
-            <div className="flex flex-row gap-16 w-full mb-10">
-              {user.coverPictures &&
-                user.coverPictures.map((imageUrl, index) => (
-                  <div key={index} className="relative">
-                    <img
-                      className="w-56 h-56 object-cover"
-                      src={`${PICTURE_URL}${imageUrl}`}
-                      alt={`UserImage ${index + 1}`}
-                    />
-                  </div>
-                ))}
+          {user.coverPictures && (
+            <div className="w-full">
+              <label className="text-textColorSecondary text-xl font-medium">
+                Images
+              </label>
+              <div className="flex flex-row gap-16 w-full mb-10">
+                {user.coverPictures &&
+                  user.coverPictures.map((imageUrl, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        className="w-56 h-56 object-cover"
+                        src={`${PICTURE_URL}${imageUrl}`}
+                        alt={"UserImage"}
+                      />
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
       <RatingModal onClose={onClose} isOpen={isOpen} />

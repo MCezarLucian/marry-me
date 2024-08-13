@@ -49,7 +49,7 @@ const LoginForm = () => {
   return (
     <Form {...form}>
       <form
-        className="font-Inter text-gray-700 rounded-xl w-1/2 h-[64vh] py-14 px-24 bg-white flex flex-col gap-4"
+        className="font-Inter text-gray-700 rounded-xl w-1/2 h-[64vh] py-14 px-24 bg-white flex flex-col gap-4 min-h-[480px]"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <div className="w-full flex flex-col justify-center items-center gap-4">
