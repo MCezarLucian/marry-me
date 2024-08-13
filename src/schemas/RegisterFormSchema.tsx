@@ -73,8 +73,8 @@ export const RegisterFormRegularSchema = z.object({
   phoneNumber: z.string().min(2, {
     message: "Phone number must be at least 2 characters.",
   }),
-  gender: z.string().min(2, {
-    message: "Gender must be at least 2 characters.",
+  gender: z.string().min(1, {
+    message: "Gender must be at least 1 characters.",
   }),
   birthdayDate: z.string().min(2, {
     message: "Please enter your date of birth.",
