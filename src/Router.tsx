@@ -12,6 +12,7 @@ import ParticipantList from "./pages/ParticipantList";
 import IndividualPage from "./pages/IndividualPage";
 import MyProfilePage from "./pages/MyProfilePage";
 import Logo from "./components/ui/logo";
+import SignUpPrincipal from "./pages/SignUpPrincipal";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       { path: "/", element: <App /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/forgot_password", element: <ForgotPasswordPage /> },
-      { path: "/set_password", element: <SetPasswordPage /> },
+      { path: "/set-password/:token", element: <SetPasswordPage /> },
+      { path: "/signup", element: <SignUpPrincipal /> },
       { path: "/signup_participant", element: <SignUpPageParticipant /> },
       { path: "/signup_regular", element: <SignUpPageRegular /> },
     ],

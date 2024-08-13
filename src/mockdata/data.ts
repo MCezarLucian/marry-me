@@ -31,26 +31,26 @@ export const users: UserType[] = [
   },
 ];
 
-export const messages: MessageType[] = [
-  {
-    id: 1,
-    senderId: 1,
-    receiverId: 2,
-    content: "Salutare, Boss!",
-    timestamp: new Date(),
-  },
-  {
-    id: 2,
-    senderId: 5,
-    receiverId: 1,
-    content: "Un mesaj!",
-    timestamp: new Date(),
-  },
-  {
-    id: 2,
-    senderId: 3,
-    receiverId: 2,
-    content: "Un mesaj!",
-    timestamp: new Date(),
-  },
-];
+// export const messages: MessageType[] = [
+//   {
+//     id: 1,
+//     senderId: 1,
+//     receiverId: 2,
+//     content: "Salutare, Boss!",
+//     timestamp: new Date(),
+//   },
+//   {
+//     id: 2,
+//     senderId: 5,
+//     receiverId: 1,
+//     content: "Un mesaj!",
+//     timestamp: new Date(),
+//   },
+//   {
+//     id: 2,
+//     senderId: 3,
+//     receiverId: 2,
+//     content: "Un mesaj!",
+//     timestamp: new Date(),
+//   },
+// ];

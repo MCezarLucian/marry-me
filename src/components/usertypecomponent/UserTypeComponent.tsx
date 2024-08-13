@@ -10,14 +10,17 @@ const UserTypeComponent = ({ participant }: UserTypeComponentProps) => {
   const navigate = useNavigate();
 
   const handleChoosUser = (e: any) => {
-    e.preventDefault();
-    navigate("/");
+    if (!participant) {
+      navigate("/signup_regular");
+    } else {
+      navigate("/signup_participant");
+    }
   };
 
   return (
     <div
       onClick={handleChoosUser}
-      className="cursor-pointer h-[250px] flex flex-col p-10 justify-center items-center w-64 gap-6 rounded-3xl bg-gradient-to-b from-NeonBlue to-MainPink font-Inter text-white"
+      className="cursor-pointer h-[300px] flex flex-col p-10 justify-center items-center w-64 gap-6 rounded-3xl bg-gradient-to-b from-NeonBlue to-MainPink font-Inter text-white"
     >
       {participant ? (
         <>

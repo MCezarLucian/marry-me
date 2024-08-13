@@ -56,9 +56,9 @@ export type SignupMapType = {
 };
 
 export type MessageType = {
-  id: number;
-  senderId: number;
-  receiverId: number;
+  id: string;
+  sender_id: string;
+  receiver_id: string;
   content: string;
   timestamp: Date;
 };
