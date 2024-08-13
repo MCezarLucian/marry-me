@@ -8,10 +8,13 @@ import useUserStore from "../store/useUserStore";
 const MyProfilePage = () => {
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
-  const { loggedUser, fetchUpdateUser } = useUserStore((state) => ({
-    loggedUser: state.loggedUser,
-    fetchUpdateUser: state.fetchUpdateUser,
-  }));
+  const { loggedUser, fetchUpdateUser, fetchDeleteUser } = useUserStore(
+    (state) => ({
+      loggedUser: state.loggedUser,
+      fetchUpdateUser: state.fetchUpdateUser,
+      fetchDeleteUser: state.fetchDeleteUser,
+    })
+  );
 
   const handleSave = (updatedUser: UserType) => {
     const formData: FormData = new FormData();
@@ -23,7 +26,8 @@ const MyProfilePage = () => {
     setOpenModalEdit(false);
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = () => {
+    fetchDeleteUser(loggedUser?.id ? loggedUser?.id : "");
     setOpenModalDelete(false);
   };
 

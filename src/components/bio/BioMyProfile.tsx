@@ -126,7 +126,7 @@ const BioMyProfile = ({
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="My Description"
               readOnly
-              value={user.description}
+              value={user.description || ""}
             />
           </div>
           <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
@@ -135,9 +135,13 @@ const BioMyProfile = ({
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="My Attributes"
               readOnly
-              value={user.personalAttributes
-                .map((attr) => attr.attributeName)
-                .join(", ")}
+              value={
+                (user.personalAttributes &&
+                  user.personalAttributes
+                    .map((attr) => attr.attributeName)
+                    .join(", ")) ||
+                ""
+              }
             />
           </div>
           <div className="flex flex-col w-full mb-6 text-textColorSecondary text-xl font-medium">
@@ -146,9 +150,13 @@ const BioMyProfile = ({
               className="mt-2 mb-3 text-base bg-background text-darkGray w-full border border-lightGray rounded p-2 h-auto resize-none focus:border-lightGray focus:outline-none"
               placeholder="Attributes for Soulmate"
               readOnly
-              value={user.searchedAttributes
-                .map((attr) => attr.attributeName)
-                .join(", ")}
+              value={
+                (user.searchedAttributes &&
+                  user.searchedAttributes
+                    .map((attr) => attr.attributeName)
+                    .join(", ")) ||
+                ""
+              }
             />
           </div>
           <div className="w-full">
@@ -156,9 +164,9 @@ const BioMyProfile = ({
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              <CoverPictureUploader profilePicture={user.coverPictures[0]} />
-              <CoverPictureUploader profilePicture={user.coverPictures[1]} />
-              <CoverPictureUploader profilePicture={user.coverPictures[2]} />
+              {(user.coverPictures || []).map((picture, index) => (
+                <CoverPictureUploader key={index} profilePicture={picture} />
+              ))}
             </div>
           </div>
         </div>
