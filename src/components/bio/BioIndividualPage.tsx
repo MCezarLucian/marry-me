@@ -42,7 +42,6 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
     }
     initializeAttributes(user.personalAttributes);
     setRating(user.rating);
-    // console.log(user);
   }, [initializeAttributes, user]);
 
   if (user === null) {

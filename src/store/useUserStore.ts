@@ -16,6 +16,7 @@ interface UserStoreType {
   fetchUserById: (id: string) => Promise<void>;
   fetchFilteredUsers: (category: string[], value: string[]) => Promise<void>;
   setLoggedUser: (id: string) => Promise<void>;
+  fetchUpdateUser: (id: string, formData: FormData) => Promise<void>;
 }
 
 const useUserStore = create<UserStoreType>((set) => ({
@@ -98,6 +99,29 @@ const useUserStore = create<UserStoreType>((set) => ({
         loading: false,
         status: response.data.status,
       });
+    } catch (error) {
+      set({
+        error: error instanceof Error ? error.message : "An error occurred",
+        loading: false,
+      });
+    }
+  },
+
+  fetchUpdateUser: async (id: string, formData: FormData) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axios.post(
+        `${BACKEND_API_URL}/user/${id}`,
+        formData,
+        {
+          headers: {
+            "x-token": `${Cookies.get("sessionToken")}`,
+          },
+        }
+      );
+      console.log(response.data);
+      const { data, status } = response.data;
+      set({ loggedUser: data, loading: false, status: status });
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : "An error occurred",

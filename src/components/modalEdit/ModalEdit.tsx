@@ -13,6 +13,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
     ...user,
     dateOfBirth: new Date(user.dateOfBirth),
   });
+  const firstName = formData.fullName.split(" ")[0];
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -23,21 +24,6 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
     birthdayDate: "",
   });
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const isOver18 = (birthday: Date) => {
-    const today = new Date();
-    const age = today.getFullYear() - birthday.getFullYear();
-    const m = today.getMonth() - birthday.getMonth();
-    return (
-      age > 18 ||
-      (age === 18 && m >= 0 && today.getDate() >= birthday.getDate())
-    );
-  };
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -45,44 +31,45 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
 
     let newErrors = { ...errors };
 
-    if (name === "email") {
-      if (!validateEmail(value)) {
-        newErrors.email = "Invalid email address";
+    if (name === "firstName") {
+      if (value.trim() === "") {
+        newErrors.firstName = "First name is required";
       } else {
-        newErrors.email = "";
+        console.log(e.target.value);
+        newErrors.firstName = "";
+        const lastName = formData.fullName.split(" ")[1];
+        setFormData({ ...formData, fullName: e.target.value + " " + lastName });
       }
     }
 
-    if (name === "firstName" && value.trim() === "") {
-      newErrors.firstName = "First name is required";
-    } else {
-      newErrors.firstName = "";
-    }
-
-    if (name === "lastName" && value.trim() === "") {
-      newErrors.lastName = "Last name is required";
-    } else {
-      newErrors.lastName = "";
-    }
-
-    if (name === "phoneNumber" && value.trim() === "") {
-      newErrors.phoneNumber = "Phone number is required";
-    } else {
-      newErrors.phoneNumber = "";
-    }
-
-    if (name === "gender" && value.trim() === "") {
-      newErrors.gender = "Gender is required";
-    } else {
-      newErrors.gender = "";
-    }
-
-    if (name === "birthdayDate") {
-      const birthday = new Date(value);
-      if (!isOver18(birthday)) {
-        newErrors.birthdayDate = "You must be over 18 years old";
+    if (name === "lastName") {
+      if (value.trim() === "") {
+        newErrors.lastName = "Last name is required";
       } else {
-        newErrors.birthdayDate = "";
+        newErrors.lastName = "";
+        const firstName = formData.fullName.split(" ")[0];
+        setFormData({
+          ...formData,
+          fullName: firstName + " " + e.target.value,
+        });
+      }
+    }
+
+    if (name === "phoneNumber") {
+      if (value.trim() === "") {
+        newErrors.phoneNumber = "Phone number is required";
+      } else {
+        newErrors.phoneNumber = "";
+        setFormData({ ...formData, phoneNumber: e.target.value });
+      }
+    }
+
+    if (name === "gender") {
+      if (value.trim() === "") {
+        newErrors.gender = "Gender is required";
+      } else {
+        newErrors.gender = "";
+        setFormData({ ...formData, gender: e.target.value });
       }
     }
 
@@ -110,7 +97,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="text"
                 name="firstName"
-                value={formData.fullName.split(" ")[0]}
+                value={firstName}
                 onChange={handleChange}
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.firstName ? "border-red-500" : ""
@@ -144,8 +131,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="email"
                 name="email"
-                value={formData.email}
-                onChange={handleChange}
+                disabled
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.email ? "border-red-500" : ""
                 }`}
@@ -202,6 +188,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
                 }`}
                 value={formData.dateOfBirth.toISOString().split("T")[0]}
                 onChange={handleChange}
+                disabled
               />
               {errors.birthdayDate && (
                 <span className="text-red-500 absolute bottom-0 text-sm">

@@ -55,6 +55,13 @@ export type SignupMapType = {
   password: string;
 };
 
+export type UpdateUserType = {
+  full_name: string;
+  phone_number: string;
+  gender: string;
+  description?: string;
+};
+
 export type MessageType = {
   id: string;
   sender_id: string;
