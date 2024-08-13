@@ -22,7 +22,6 @@ const useProfileStore = create<RatingType>((set) => ({
     formData.append("fileToUpload", fileToUpload);
 
     set({ loading: true, error: null, status: null });
-    // console.log("api", `${BACKEND_API_URL}/user/${api}`);
     try {
       const response = await axios.post(
         `${BACKEND_API_URL}/user/${userId}/set-profile-picture`,
@@ -34,7 +33,6 @@ const useProfileStore = create<RatingType>((set) => ({
         }
       );
       const { data } = response.data;
-      // console.log("store", data);
       set({
         profile: data,
         status: response.data,

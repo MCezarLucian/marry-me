@@ -34,7 +34,6 @@ const useRatingStore = create<RatingType>((set) => ({
   ) => {
     const api = `${userId}/personal-attribute/${attributeId}/rate/${value}`;
     set({ loading: true, error: null, status: null });
-    // console.log("api", `${BACKEND_API_URL}/user/${api}`);
     try {
       const response = await axios.post(`${BACKEND_API_URL}/user/${api}`, {
         headers: {
@@ -42,7 +41,6 @@ const useRatingStore = create<RatingType>((set) => ({
         },
       });
       const { data } = response.data;
-      // console.log("store", data);
       set({
         attributes: data,
         loading: false,

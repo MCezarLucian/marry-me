@@ -35,10 +35,8 @@ const useUserStore = create<UserStoreType>((set) => ({
           "x-token": `${Cookies.get("sessionToken")}`,
         },
       });
-      /* console.log(response.data.data); */
       set({ users: response.data.data, loading: false });
     } catch (error: any) {
-      // console.log(error.response.data);
       set({
         error: error instanceof Error ? error.message : "An error occurred",
         loading: false,

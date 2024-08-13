@@ -16,7 +16,6 @@ const RatingModal = ({ isOpen, onClose }: RatingModalProps) => {
   const { attributes } = useRatingStore((state) => ({
     attributes: state.attributes,
   }));
-  console.log(attributes);
 
   if (!isOpen) return null;
 

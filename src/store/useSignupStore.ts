@@ -39,7 +39,6 @@ const useSignUpStore = create<SignupType>((set) => ({
       }
     }
     const formSignupString = formSignup.join("&");
-    console.log(formSignupString);
 
     set({ loading: true, error: null, status: null, message: null });
     try {
@@ -52,7 +51,6 @@ const useSignUpStore = create<SignupType>((set) => ({
           },
         }
       );
-      console.log(response.data);
       const { status, message, data } = response.data;
       set({
         loading: false,
@@ -63,7 +61,6 @@ const useSignUpStore = create<SignupType>((set) => ({
     } catch (error: any) {
       const status = error.response?.data?.status ?? "error";
       const message = error.response?.data?.data ?? "An error occurred";
-      console.log(error);
 
       set({
         error: error instanceof Error ? error.message : "An error occurred",
