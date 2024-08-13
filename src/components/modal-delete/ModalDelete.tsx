@@ -1,5 +1,7 @@
 import React from "react";
 import { UserType } from "../../lib/types";
+import { logOut } from "../../lib/utils";
+import { useNavigate } from "react-router-dom";
 
 interface ModalDeleteProps {
   user: UserType;
@@ -17,6 +19,8 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({
     onDelete(user.id);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center font-Inter">
       <div className="bg-white flex flex-col items-center justify-center rounded-lg p-8 max-w-xs w-full">
@@ -30,7 +34,11 @@ const ModalDelete: React.FC<ModalDeleteProps> = ({
           </button>
           <button
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-            onClick={handleDelete}
+            onClick={() => {
+              handleDelete();
+              logOut();
+              navigate("/login");
+            }}
           >
             Delete
           </button>

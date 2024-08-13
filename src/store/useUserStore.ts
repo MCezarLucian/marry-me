@@ -17,6 +17,7 @@ interface UserStoreType {
   fetchFilteredUsers: (category: string[], value: string[]) => Promise<void>;
   setLoggedUser: (id: string) => Promise<void>;
   fetchUpdateUser: (id: string, formData: FormData) => Promise<void>;
+  fetchDeleteUser: (id: string) => Promise<void>;
 }
 
 const useUserStore = create<UserStoreType>((set) => ({
@@ -122,6 +123,22 @@ const useUserStore = create<UserStoreType>((set) => ({
       console.log(response.data);
       const { data, status } = response.data;
       set({ loggedUser: data, loading: false, status: status });
+    } catch (error) {
+      set({
+        error: error instanceof Error ? error.message : "An error occurred",
+        loading: false,
+      });
+    }
+  },
+
+  fetchDeleteUser: async (id: string) => {
+    set({ loading: true, error: null });
+    try {
+      const response = await axios.delete(`${BACKEND_API_URL}/user/${id}`, {
+        headers: {
+          "x-token": `${Cookies.get("sessionToken")}`,
+        },
+      });
     } catch (error) {
       set({
         error: error instanceof Error ? error.message : "An error occurred",

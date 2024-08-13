@@ -28,7 +28,6 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         <a className="hover:text-MainPink" href="/users">
           Users
         </a>
-        <p>{user?.fullName}</p>
         <p
           className="hover:text-MainPink cursor-pointer"
           onClick={() => {
@@ -38,6 +37,8 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         >
           Log Out
         </p>
+        <p>{user?.fullName}</p>
+
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>

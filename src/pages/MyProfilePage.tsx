@@ -10,10 +10,13 @@ const MyProfilePage = () => {
   const [localUsers, setLocalUsers] = useState<UserType[]>(users);
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
-  const { loggedUser, fetchUpdateUser } = useUserStore((state) => ({
-    loggedUser: state.loggedUser,
-    fetchUpdateUser: state.fetchUpdateUser,
-  }));
+  const { loggedUser, fetchUpdateUser, fetchDeleteUser } = useUserStore(
+    (state) => ({
+      loggedUser: state.loggedUser,
+      fetchUpdateUser: state.fetchUpdateUser,
+      fetchDeleteUser: state.fetchDeleteUser,
+    })
+  );
 
   const handleSave = (updatedUser: UserType) => {
     const formData: FormData = new FormData();
@@ -25,8 +28,8 @@ const MyProfilePage = () => {
     setOpenModalEdit(false);
   };
 
-  const handleDelete = (id: string) => {
-    setLocalUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
+  const handleDelete = () => {
+    fetchDeleteUser(loggedUser?.id ? loggedUser?.id : "");
     setOpenModalDelete(false);
   };
 
