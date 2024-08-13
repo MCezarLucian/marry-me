@@ -63,7 +63,6 @@ const RegisterForm = () => {
       password: values.password,
     };
 
-    // console.log(fetchData);
     fetchSignUp(fetchData);
   }
 
@@ -131,7 +130,6 @@ const RegisterForm = () => {
             loading={loading}
           />
         )}
-        {/* <Button type="submit">Submit</Button> */}
       </form>
     </Form>
   );

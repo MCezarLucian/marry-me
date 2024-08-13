@@ -96,16 +96,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const isValid =
-      Object.values(errors).every((error) => error === "") &&
-      formData.fullName &&
-      formData.email &&
-      formData.phoneNumber &&
-      formData.gender &&
-      formData.dateOfBirth;
-
     onSave(formData);
-    console.log(formData);
   };
 
   return (

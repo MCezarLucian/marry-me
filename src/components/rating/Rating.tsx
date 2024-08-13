@@ -31,7 +31,6 @@ const Rating: React.FC<RatingProps> = ({ value, edit, attributeId }) => {
 
   const handleClick = (index: number) => {
     const newRating = index + 1;
-    // setRating(newRating);
 
     if (loggedUser && attributeId) {
       fetchRateAttribute(loggedUser.id, attributeId, newRating.toString());

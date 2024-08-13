@@ -5,6 +5,7 @@ import { UserType } from "../../lib/types";
 import { Link, useNavigate } from "react-router-dom";
 import { logOut } from "../../lib/utils";
 import Spinner from "../spinner/Spinner";
+import { PICTURE_URL } from "../../configuration/api";
 
 interface NavbarProps {
   logged?: boolean; //verify if an user is logged
@@ -65,7 +66,7 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
           Log Out
         </p>
         <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarImage src={`${PICTURE_URL}${user?.profilePicture}`} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </div>
