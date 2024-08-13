@@ -3,11 +3,9 @@ import { UserType } from "../lib/types";
 import BioMyProfile from "../components/bio/BioMyProfile";
 import ModalDelete from "../components/modal-delete/ModalDelete";
 import ModalEdit from "../components/modalEdit/ModalEdit";
-import { users } from "../mockdata/data";
 import useUserStore from "../store/useUserStore";
 
 const MyProfilePage = () => {
-  const [localUsers, setLocalUsers] = useState<UserType[]>(users);
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
   const { loggedUser, fetchUpdateUser } = useUserStore((state) => ({
@@ -26,7 +24,6 @@ const MyProfilePage = () => {
   };
 
   const handleDelete = (id: string) => {
-    setLocalUsers((prevUsers) => prevUsers.filter((u) => u.id !== id));
     setOpenModalDelete(false);
   };
 
