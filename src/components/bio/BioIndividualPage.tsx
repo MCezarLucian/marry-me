@@ -114,7 +114,7 @@ const Bio = ({ user, onClick, userId }: BioProps) => {
               src={
                 user.profilePicture
                   ? `${PICTURE_URL}${user.profilePicture}`
-                  : "logo.png"
+                  : "images/pp.png"
               }
               alt="profile_picture"
             />
