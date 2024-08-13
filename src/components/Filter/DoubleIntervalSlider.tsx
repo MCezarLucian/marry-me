@@ -30,13 +30,6 @@ const DoubleIntervalSlider: React.FC<DoubleIntervalSliderProps> = ({
     }
   }, [min, max, reset]);
 
-  /*  useEffect(() => {
-    if (reset) {
-      setValues([min, max]);
-      setInputs([min.toString(), max.toString()]);
-    }
-  }, [reset, min, max]); */
-
   const handleChange = (newValues: [number, number]) => {
     setValues(newValues);
     onChange(newValues);

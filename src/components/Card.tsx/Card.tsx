@@ -13,6 +13,10 @@ interface CardProps {
 const Card = ({ user, onClick }: CardProps) => {
   const [rating, setRating] = React.useState(user.rating);
 
+  React.useEffect(() => {
+    setRating(user.rating);
+  }, [user]);
+
   if (user === null) {
     return <></>;
   }
