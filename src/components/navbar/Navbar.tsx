@@ -53,9 +53,6 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         <a className="hover:text-MainPink" href="/contact">
           Contact Us
         </a>
-        <a className="hover:text-MainPink" href="/my_profile">
-          {user?.fullName}
-        </a>
         <p
           className="hover:text-MainPink cursor-pointer"
           onClick={() => {
@@ -65,6 +62,9 @@ function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
         >
           Log Out
         </p>
+        <a className="hover:text-MainPink" href="/my_profile">
+          {user?.fullName}
+        </a>
         <Avatar>
           <AvatarImage src={`${PICTURE_URL}${user?.profilePicture}`} />
           <AvatarFallback>CN</AvatarFallback>

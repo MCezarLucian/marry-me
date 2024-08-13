@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UserType } from "@/lib/types";
-import { Star } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import ProfilePicture from "../imageUploader/ProfilePicture";
-import { PICTURE_URL } from "../../configuration/api";
 import CoverPictureUploader from "../imageUploader/CoverPicturesUploader";
 
 interface BioProps {
@@ -19,6 +18,7 @@ const BioMyProfile = ({
   onOpenModalEdit,
 }: BioProps) => {
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [rating, setRating] = useState(user.rating);
 
   const handleCopy = (text: string, field: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -27,11 +27,13 @@ const BioMyProfile = ({
     });
   };
 
+  useEffect(() => {
+    setRating(user.rating);
+  }, [user]);
+
   if (!user) {
     return <></>;
   }
-
-  console.log(user);
 
   return (
     <div className="flex items-center justify-center w-full">
@@ -41,11 +43,16 @@ const BioMyProfile = ({
             <ProfilePicture profilePicture={`${user.profilePicture}`} />
 
             <div className="flex flex-row text-xl gap-1 font-medium tracking-tight text-gray-900 sm:text-5xl mt-20">
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
-              <Star className="text-darkGray fill-darkGray" />
+              {[...Array(5)].map((_, index) => (
+                <StarIcon
+                  key={index}
+                  className={`w-6 h-6 ${
+                    index < rating ? "text-yellow-400" : "text-gray-400"
+                  }`}
+                  fill={index < rating ? "#f59e0b" : "none"}
+                  stroke={index < rating ? "none" : "#9ca3af"}
+                />
+              ))}
             </div>
           </div>
           <div className="text-textColorSecondary text-xl font-medium min-w-[360px]">
@@ -149,15 +156,6 @@ const BioMyProfile = ({
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              {/* {user.coverPictures.map((imageUrl, index) => (
-                <div key={index} className="relative">
-                  <img
-                    className="w-56 h-56 object-cover"
-                    src={imageUrl}
-                    alt={`UserImage ${index + 1}`}
-                  />
-                </div>
-              ))} */}
               <CoverPictureUploader profilePicture={user.coverPictures[0]} />
               <CoverPictureUploader profilePicture={user.coverPictures[1]} />
               <CoverPictureUploader profilePicture={user.coverPictures[2]} />

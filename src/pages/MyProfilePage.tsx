@@ -10,14 +10,18 @@ const MyProfilePage = () => {
   const [localUsers, setLocalUsers] = useState<UserType[]>(users);
   const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   const [openModalEdit, setOpenModalEdit] = useState<boolean>(false);
-  const { loggedUser } = useUserStore((state) => ({
+  const { loggedUser, fetchUpdateUser } = useUserStore((state) => ({
     loggedUser: state.loggedUser,
+    fetchUpdateUser: state.fetchUpdateUser,
   }));
 
   const handleSave = (updatedUser: UserType) => {
-    setLocalUsers((prevUsers) =>
-      prevUsers.map((u) => (u.id === updatedUser.id ? updatedUser : u))
-    );
+    const formData: FormData = new FormData();
+    formData.append("full_name", updatedUser.fullName);
+    formData.append("phone_number", updatedUser.phoneNumber);
+    formData.append("gender", updatedUser.gender);
+    formData.append("description", updatedUser.description);
+    fetchUpdateUser(loggedUser?.id ? loggedUser?.id : "", formData);
     setOpenModalEdit(false);
   };
 
@@ -57,7 +61,7 @@ const MyProfilePage = () => {
       />
       {openModalDelete && (
         <ModalDelete
-          user={localUsers[0]}
+          user={loggedUser}
           openModalDelete={openModalDelete}
           onDelete={handleDelete}
           onClose={handleCloseModalDelete}
@@ -65,7 +69,7 @@ const MyProfilePage = () => {
       )}
       {openModalEdit && (
         <ModalEdit
-          user={localUsers[0]}
+          user={loggedUser}
           onSave={handleSave}
           openModalEdit={openModalEdit}
           onClose={handleCloseModalEdit}
