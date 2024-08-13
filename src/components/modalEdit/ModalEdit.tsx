@@ -13,7 +13,12 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
     ...user,
     dateOfBirth: new Date(user.dateOfBirth),
   });
-  const firstName = formData.fullName.split(" ")[0];
+  const [firstName, setFirstName] = useState<string>(
+    formData.fullName.split(" ")[0]
+  );
+  const [lastName, setLastName] = useState<string>(
+    formData.fullName.split(" ")[1]
+  );
 
   const [errors, setErrors] = useState({
     firstName: "",
@@ -37,8 +42,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
       } else {
         console.log(e.target.value);
         newErrors.firstName = "";
-        const lastName = formData.fullName.split(" ")[1];
-        setFormData({ ...formData, fullName: e.target.value + " " + lastName });
+        setFirstName(e.target.value);
       }
     }
 
@@ -47,11 +51,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
         newErrors.lastName = "Last name is required";
       } else {
         newErrors.lastName = "";
-        const firstName = formData.fullName.split(" ")[0];
-        setFormData({
-          ...formData,
-          fullName: firstName + " " + e.target.value,
-        });
+        setLastName(e.target.value);
       }
     }
 
@@ -83,7 +83,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onSave({ ...formData, fullName: firstName + " " + lastName });
   };
 
   return (
@@ -114,7 +114,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="text"
                 name="lastName"
-                value={formData.fullName.split(" ")[1]}
+                value={lastName}
                 onChange={handleChange}
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.lastName ? "border-red-500" : ""
