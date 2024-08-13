@@ -36,7 +36,6 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: z.infer<typeof LogInFormSchema>) => {
-    // console.log(data);
     fetchLogin(data.email, data.password);
   };
 

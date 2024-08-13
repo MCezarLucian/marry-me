@@ -60,7 +60,6 @@ const useLoginStore = create<LoginType>((set) => ({
           },
         }
       );
-      // console.log(response.data);
       const { status, message, data } = response.data;
       set({
         user: data.user,

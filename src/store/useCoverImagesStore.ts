@@ -24,7 +24,6 @@ const useCoverImagesStore = create<CoverImagesType>((set) => ({
     });
 
     set({ loading: true, error: null, status: null });
-    // console.log("api", `${BACKEND_API_URL}/user/${api}`);
     try {
       const response = await axios.post(
         `${BACKEND_API_URL}/user/${userId}/set-cover-pictures`,
@@ -36,7 +35,6 @@ const useCoverImagesStore = create<CoverImagesType>((set) => ({
         }
       );
       const { data } = response.data;
-      //   console.log("store", response);
       set({
         coverIamges: data,
         status: response.data,

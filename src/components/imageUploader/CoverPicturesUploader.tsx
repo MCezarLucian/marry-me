@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DropzoneOptions } from "react-dropzone";
 import { Plus } from "lucide-react";
 

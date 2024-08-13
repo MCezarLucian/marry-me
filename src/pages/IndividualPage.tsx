@@ -32,7 +32,6 @@ const IndividualPage = () => {
     }
   }, [fetchUserById, id]);
 
-  // console.log("individual");
   if (loading) {
     return <Spinner />;
   }
