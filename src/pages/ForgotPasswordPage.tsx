@@ -3,7 +3,7 @@ import React from "react";
 
 const ForgotPasswordPage = () => {
   return (
-    <div className="w-full h-full flex justify-center p-16 max-w-[1280px]">
+    <div className="w-full flex justify-center p-16 max-w-[1280px] h-[calc(100vh-59px)]">
       <ForgotPassword />
     </div>
   );

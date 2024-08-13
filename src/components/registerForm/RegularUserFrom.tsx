@@ -79,7 +79,7 @@ const RegularUserForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="font-Inter text-gray-700 rounded-xl w-3/4 h-[72vh] py-14 px-24 bg-white flex flex-col gap-4"
+        className="font-Inter text-gray-700 rounded-xl w-3/4  py-14 px-24 bg-white flex flex-col gap-4"
       >
         <div className="w-full flex flex-col justify-center items-center gap-4">
           <h1 className="text-4xl font-bold text-black">Create an Account</h1>
@@ -251,7 +251,7 @@ const RegularUserForm = () => {
           <div className="w-full">
             {loading && <Spinner />}
             <p>{message}</p>
-            <Button className="w-full" type="submit">
+            <Button className="w-full mt-5" type="submit">
               Create Account
             </Button>
           </div>

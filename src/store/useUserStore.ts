@@ -81,26 +81,20 @@ const useUserStore = create<UserStoreType>((set) => ({
   },
 
   fetchFilteredUsers: async (category: string[], value: string[]) => {
-    let query = "?";
-    for (let i = 0; i < category.length; i++) {
-      if (i < category.length - 1) {
-        query = query + category[i] + "=" + value[i] + "&";
-      } else {
-        query = query + category[i] + "=" + value[i];
-      }
-    }
-    console.log(`session_id=${Cookies.get("sessionToken")}`);
+    let query = category
+      .map((cat, i) => `${cat}=${encodeURIComponent(value[i])}`)
+      .join("&");
+
     set({ loading: true, error: null });
     try {
       const response = await axios.get(
-        `${BACKEND_API_URL}/user/listBy${query}`,
+        `${BACKEND_API_URL}/user/listBy?${query}`,
         {
           headers: {
             "x-token": `${Cookies.get("sessionToken")}`,
           },
         }
       );
-      /* console.log(response); */
       set({
         users: response.data.data,
         loading: false,
