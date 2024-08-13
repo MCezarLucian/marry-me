@@ -63,7 +63,7 @@ const useChatStore = create<ChatType>((set) => ({
     set({ loading: true, error: null, status: null });
     try {
       const response = await axios.post(
-        `${BACKEND_API_URL}/user/${token}/reset-password`,
+        `${BACKEND_API_URL}/user/set-password/${token}`,
         formData,
         {
           headers: {
