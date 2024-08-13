@@ -3,8 +3,8 @@ import { UserType } from "../lib/types";
 import Chat from "../components/chat/Chat";
 import useUserStore from "../store/useUserStore";
 import Spinner from "../components/spinner/Spinner";
-import Card from "../components/card.tsx/Card";
-import Filter from "../components/filter/Filter";
+import Card from "../components/Card.tsx/Card";
+import Filter from "../components/Filter/Filter";
 
 const ParticipantList = () => {
   const { users, fetchUsers, user, fetchFilteredUsers } = useUserStore(
@@ -49,7 +49,7 @@ const ParticipantList = () => {
             onClick={() => handleCardClick(user)}
           />
         ))}
-        {user?.roleType !== "Admin" &&
+        {/* {user?.roleType !== "Admin" &&
           Array.isArray(users) &&
           users
             .filter((user) => user.roleType === "Contestant")
@@ -60,7 +60,7 @@ const ParticipantList = () => {
                 openChat={openChat}
                 onClick={() => handleCardClick(user)}
               />
-            ))}
+            ))} */}
       </div>
       {openChat && selectedUser && (
         <Chat

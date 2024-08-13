@@ -41,11 +41,13 @@ const useRatingStore = create<RatingType>((set) => ({
         },
       });
       const { data } = response.data;
+      console.log(data);
       set({
         attributes: data,
         loading: false,
       });
     } catch (error: any) {
+      console.log(error);
       set({
         error: error instanceof Error ? error.message : "An error occurred",
         loading: false,

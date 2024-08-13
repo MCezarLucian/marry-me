@@ -57,8 +57,8 @@ const RegisterStepTwo = ({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="male">Male</SelectItem>
-                  <SelectItem value="female">Female</SelectItem>
+                  <SelectItem value="m">Male</SelectItem>
+                  <SelectItem value="f">Female</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
