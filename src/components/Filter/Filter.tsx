@@ -18,15 +18,19 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const [sliderChanged, setSliderChanged] = useState<boolean>(false);
   const [resetSlider, setResetSlider] = useState<boolean>(false);
 
-  const ageRanges = ["18 > 25", "25 > 30", "30 > 40", "40 > 50", "50 > 70"];
+  const ageRanges = [
+    ["18", "25"],
+    ["25", "30"],
+    ["30", "40"],
+    ["40", "50"],
+    ["50", "70"],
+  ];
   const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
     setSliderChanged(true);
-    const [min, max] = values;
-    setRange([min, max]);
-    setSelectedAgeRanges([]);
-    setSelectedAgeRanges([`${min} > ${max}`]);
+    setRange(values);
+    setSelectedAgeRanges([`${values[0]} > ${values[1]}`]);
   };
 
   const handleAgeRangeChange = (range: string) => {
@@ -34,25 +38,23 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       ? selectedAgeRanges.filter((r) => r !== range)
       : [...selectedAgeRanges, range];
 
-    setSliderChanged(false);
-    setRange([18, 110]);
     setSelectedAgeRanges(newSelectedRanges);
 
-    if (newSelectedRanges.length === 1) {
+    if (newSelectedRanges.length > 0) {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
       setRange([min, max]);
       setSliderChanged(false);
-      setResetSlider(true);
+      setResetSlider(false);
     } else {
       setRange([18, 110]);
-      setSliderChanged(false);
+      setSliderChanged(true);
     }
   };
-
+  /* 
   const resetSliderRange = () => {
     setResetSlider(false);
   };
-
+ */
   const handleGenderChange = (gender: string) => {
     setSelectedGenders((prev) =>
       prev.includes(gender)
@@ -83,21 +85,26 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (attributes) {
-      categories.push("attributes");
+      categories.push("personal_attributes");
       values.push(attributes);
     }
 
     if (selectedGenders.length > 0) {
       categories.push("gender");
-      values.push(selectedGenders.toString());
+      values.push(selectedGenders.join(","));
     }
 
     if (selectedAgeRanges.length > 0) {
-      categories.push("age");
-      values.push(selectedAgeRanges.join(","));
+      const [min, max] = selectedAgeRanges[0].split(" > ");
+      categories.push("age_from[]");
+      values.push(`${values[0]}`);
+      categories.push("age_to[]");
+      values.push(`${values[1]}`);
     } else if (sliderChanged) {
-      categories.push("age");
-      values.push(`${range[0]} > ${range[1]}`);
+      categories.push("age_from[]");
+      values.push(`${range[0]}`);
+      categories.push("age_to[]");
+      values.push(`${range[1]}`);
     }
 
     if (admin && selectedTypes.length > 0) {
@@ -164,22 +171,21 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           Age
         </label>
         <div className="flex flex-col">
-          {ageRanges.map((range) => (
+          {/* {ageRanges.map((range) => (
             <label
               key={range}
               className="mr-2 mb-5 text-base flex flex-row items-center cursor-pointer"
             >
               <input
                 type="checkbox"
-                value={range}
+                value={range.join(" > ")}
                 checked={selectedAgeRanges.includes(range)}
                 onChange={() => handleAgeRangeChange(range)}
-                onClick={resetSliderRange}
                 className="mr-2 w-4 h-4"
               />
-              {range}
+              {range.join(" > ")}
             </label>
-          ))}
+          ))} */}
 
           <DoubleIntervalSlider
             min={18}

@@ -38,28 +38,6 @@ const useUserStore = create<UserStoreType>((set) => ({
         },
       });
       const { data, status } = response.data;
-
-      // let mappedUsers: UserType[] = data.map((data: any) => {
-      //   const mappedUser: UserType = {
-      //     id: data.id,
-      //     fullName: data.full_name,
-      //     email: data.email,
-      //     age: data.age,
-      //     phoneNumber: data.phone_number,
-      //     gender: data.gender,
-      //     rating: data.rating,
-      //     roleId: data.roleId,
-      //     roleType: data.role_type,
-      //     dateOfBirth: data.date_of_birth,
-      //     description: data.description,
-      //     personalAttributes: data.personal_attributes,
-      //     searchedAttributes: data.searched_attributes,
-      //     coverPictures: data.coverPictures,
-      //     profilePicture: data.profilePicture,
-      //   };
-      //   return mappedUser;
-      // });
-      // console.log(mappedUsers);
       set({ users: data, loading: false, status: status });
     } catch (error: any) {
       set({
@@ -107,7 +85,7 @@ const useUserStore = create<UserStoreType>((set) => ({
     let query = category
       .map((cat, i) => `${cat}=${encodeURIComponent(value[i])}`)
       .join("&");
-
+    console.log(query);
     set({ loading: true, error: null });
     try {
       const response = await axios.get(
