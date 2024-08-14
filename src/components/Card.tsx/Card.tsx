@@ -53,9 +53,9 @@ const Card = ({ user, onClick }: CardProps) => {
             />
           ))}
         </div>
-        <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
-          <div className="mr-1">{firstName}</div>
-          {lastName && <div>{lastName}</div>}
+        <div className="flex flex-col text-xl font-medium tracking-tight text-gray-900 max-w-[150px]">
+          <div className="truncate">{firstName}</div>
+          {lastName && <div className="truncate">{lastName}</div>}
         </div>
         <div className="flex flex-row text-xl font-medium tracking-tight text-gray-900">
           {user.age} years old
