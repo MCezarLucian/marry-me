@@ -22,9 +22,11 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
-    setRange(values);
     setSliderChanged(true);
+    const [min, max] = values;
+    setRange([min, max]);
     setSelectedAgeRanges([]);
+    setSelectedAgeRanges([`${min} > ${max}`]);
   };
 
   const handleAgeRangeChange = (range: string) => {
@@ -32,9 +34,9 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       ? selectedAgeRanges.filter((r) => r !== range)
       : [...selectedAgeRanges, range];
 
-    setSelectedAgeRanges(newSelectedRanges);
     setSliderChanged(false);
     setRange([18, 110]);
+    setSelectedAgeRanges(newSelectedRanges);
 
     if (newSelectedRanges.length === 1) {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
@@ -94,10 +96,8 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       categories.push("age");
       values.push(selectedAgeRanges.join(","));
     } else if (sliderChanged) {
-      categories.push("minAge");
-      values.push(range[0].toString());
-      categories.push("maxAge");
-      values.push(range[1].toString());
+      categories.push("age");
+      values.push(`${range[0]} > ${range[1]}`);
     }
 
     if (admin && selectedTypes.length > 0) {
@@ -142,7 +142,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
               type="checkbox"
               value="male"
               checked={selectedGenders.includes("m")}
-              onChange={() => handleGenderChange("male")}
+              onChange={() => handleGenderChange("m")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
             />
             Male
@@ -152,7 +152,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
               type="checkbox"
               value="female"
               checked={selectedGenders.includes("f")}
-              onChange={() => handleGenderChange("female")}
+              onChange={() => handleGenderChange("f")}
               className="mr-2 w-4 h-4"
             />
             Female
