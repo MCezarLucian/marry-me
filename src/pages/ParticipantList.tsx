@@ -7,7 +7,7 @@ import Card from "../components/Card.tsx/Card";
 import Filter from "../components/Filter/Filter";
 
 const ParticipantList = () => {
-  const { users, fetchUsers, user, fetchFilteredUsers } = useUserStore(
+  const { users, fetchUsers, user, fetchFilteredUsers, loading } = useUserStore(
     (state) => ({
       users: state.users || [],
       user: state.user,
@@ -42,14 +42,20 @@ const ParticipantList = () => {
     <div className="w-full overflow-y-scroll h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200s">
       <Filter users={users} fetchFilteredUsers={fetchFilteredUsers} />
       <div className="grid grid-cols-3 gap-4 justify-center items-center absolute top-0 left-1/4 p-8 mb-56">
-        {users.map((user) => (
-          <Card
-            key={user.id}
-            user={user}
-            openChat={openChat}
-            onClick={() => handleCardClick(user)}
-          />
-        ))}
+        {loading ? (
+          <div className="w-[80vh] pt-20 col-span-3 flex justify-center items-center justify-items-center">
+            <Spinner />
+          </div>
+        ) : (
+          users.map((user) => (
+            <Card
+              key={user.id}
+              user={user}
+              openChat={openChat}
+              onClick={() => handleCardClick(user)}
+            />
+          ))
+        )}
         {/* {user?.roleType !== "Admin" &&
           Array.isArray(users) &&
           users

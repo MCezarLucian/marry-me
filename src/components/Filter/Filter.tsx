@@ -83,8 +83,11 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
 
     if (attributes) {
       console.log("Filtering by attributes:", attributes);
-      categories.push("attributes");
-      values.push(attributes);
+      const personalAttributes = attributes.split(",");
+      personalAttributes.forEach((attribute) => {
+        categories.push("personal_attributes[]");
+        values.push(attribute);
+      });
     }
 
     if (selectedGenders.length > 0) {
@@ -94,14 +97,20 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (selectedAgeRanges.length > 0) {
+      console.log(selectedAgeRanges);
       console.log("Filtering by age range:", selectedAgeRanges);
-      categories.push("age");
-      values.push(selectedAgeRanges.join(","));
+      selectedAgeRanges.forEach((element) => {
+        const [age_from, age_to] = element.split(" > ");
+        categories.push("age_from[]");
+        categories.push("age_to[]");
+        values.push(age_from);
+        values.push(age_to);
+      });
     } else if (sliderChanged) {
       console.log("Filtering by age slider:", range);
-      categories.push("minAge");
+      categories.push("age_from[]");
       values.push(range[0].toString());
-      categories.push("maxAge");
+      categories.push("age_to[]");
       values.push(range[1].toString());
     }
 

@@ -20,7 +20,6 @@ const Card = ({ user, onClick }: CardProps) => {
   if (!user) {
     return <></>;
   }
-  // console.log(user);
 
   const fullName = user.fullName || "";
   const [firstName, lastName] = fullName.split(" ");
