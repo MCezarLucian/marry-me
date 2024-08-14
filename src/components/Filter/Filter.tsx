@@ -76,29 +76,24 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     const values: string[] = [];
 
     if (name) {
-      console.log("Filtering by name:", name);
       categories.push("full_name");
       values.push(name);
     }
 
     if (attributes) {
-      console.log("Filtering by attributes:", attributes);
       categories.push("attributes");
       values.push(attributes);
     }
 
     if (selectedGenders.length > 0) {
-      console.log("Filtering by gender:", selectedGenders);
       categories.push("gender");
       values.push(selectedGenders.toString());
     }
 
     if (selectedAgeRanges.length > 0) {
-      console.log("Filtering by age range:", selectedAgeRanges);
       categories.push("age");
       values.push(selectedAgeRanges.join(","));
     } else if (sliderChanged) {
-      console.log("Filtering by age slider:", range);
       categories.push("minAge");
       values.push(range[0].toString());
       categories.push("maxAge");
@@ -106,7 +101,6 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (admin && selectedTypes.length > 0) {
-      console.log("Filtering by type:", selectedTypes);
       categories.push("type");
       values.push(selectedTypes.join(","));
     }
@@ -146,9 +140,9 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="m"
+              value="male"
               checked={selectedGenders.includes("m")}
-              onChange={() => handleGenderChange("m")}
+              onChange={() => handleGenderChange("male")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
             />
             Male
@@ -156,9 +150,9 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 text-base flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="f"
+              value="female"
               checked={selectedGenders.includes("f")}
-              onChange={() => handleGenderChange("f")}
+              onChange={() => handleGenderChange("female")}
               className="mr-2 w-4 h-4"
             />
             Female

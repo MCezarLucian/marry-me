@@ -131,6 +131,7 @@ const ModalEdit = ({ user, onSave, onClose }: ModalEditProps) => {
               <input
                 type="email"
                 name="email"
+                value={formData.email}
                 disabled
                 className={`border rounded py-2 px-3 mt-2 mb-1 text-base text-darkGray focus:border-lightGray focus:outline-none ${
                   errors.email ? "border-red-500" : ""

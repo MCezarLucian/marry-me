@@ -8,9 +8,9 @@ import Spinner from "../spinner/Spinner";
 import { PICTURE_URL } from "../../configuration/api";
 
 interface NavbarProps {
-  logged?: boolean; //verify if an user is logged
-  admin?: boolean; //verify if the user is an admin
-  user?: UserType; //user data
+  logged?: boolean;
+  admin?: boolean;
+  user?: UserType;
 }
 
 function ShowMenu(admin: boolean | undefined, user: UserType | undefined) {
