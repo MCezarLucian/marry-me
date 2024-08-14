@@ -164,9 +164,9 @@ const BioMyProfile = ({
               Images
             </label>
             <div className="flex flex-row gap-16 w-full mb-10">
-              {(user.coverPictures || []).map((picture, index) => (
-                <CoverPictureUploader key={index} profilePicture={picture} />
-              ))}
+              <CoverPictureUploader profilePicture={user.coverPictures[0]} />
+              <CoverPictureUploader profilePicture={user.coverPictures[1]} />
+              <CoverPictureUploader profilePicture={user.coverPictures[2]} />
             </div>
           </div>
         </div>

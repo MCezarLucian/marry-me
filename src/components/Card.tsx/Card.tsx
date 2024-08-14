@@ -17,9 +17,10 @@ const Card = ({ user, onClick }: CardProps) => {
     setRating(user.rating);
   }, [user]);
 
-  if (user === null) {
+  if (!user) {
     return <></>;
   }
+
   const fullName = user.fullName || "";
   const [firstName, lastName] = fullName.split(" ");
   return (

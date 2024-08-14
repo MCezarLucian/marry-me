@@ -68,6 +68,7 @@ export type MessageType = {
   receiver_id: string;
   content: string;
   timestamp: Date;
+  read_timestamp: string;
 };
 
 export type ForgotPasswordType = UseFormReturn<

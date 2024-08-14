@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { UserType } from "../../lib/types";
-import { Star, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import RatingModal from "../rating/RatingModal";
 import Spinner from "../spinner/Spinner";
 import useRatingStore from "../../store/useRatingStore";
