@@ -86,7 +86,7 @@ const useUserStore = create<UserStoreType>((set) => ({
     let query = category
       .map((cat, i) => `${cat}=${encodeURIComponent(value[i])}`)
       .join("&");
-
+    console.log(query);
     set({ loading: true, error: null });
     try {
       const response = await axios.get(
