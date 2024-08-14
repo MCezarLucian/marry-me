@@ -35,11 +35,15 @@ const useRatingStore = create<RatingType>((set) => ({
     const api = `${userId}/personal-attribute/${attributeId}/rate/${value}`;
     set({ loading: true, error: null, status: null });
     try {
-      const response = await axios.post(`${BACKEND_API_URL}/user/${api}`, {
-        headers: {
-          "x-token": `${Cookies.get("sessionToken")}`,
-        },
-      });
+      const response = await axios.post(
+        `${BACKEND_API_URL}/user/${api}`,
+        {},
+        {
+          headers: {
+            "x-token": `${Cookies.get("sessionToken")}`,
+          },
+        }
+      );
       const { data } = response.data;
       console.log(data);
       set({

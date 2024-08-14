@@ -5,6 +5,7 @@ import Message from "./Message";
 import SendMessage from "./Send";
 import useChatStore from "../../store/useChatStore";
 import Cookies from "js-cookie";
+import Spinner from "../spinner/Spinner";
 
 interface ChatProps {
   sender?: UserType;
@@ -14,13 +15,13 @@ interface ChatProps {
 }
 
 const Chat = ({ sender, receiver, onClose }: ChatProps) => {
-  const { messages, fetchAllMessages, fetchSendMessage } = useChatStore(
-    (state) => ({
+  const { messages, fetchAllMessages, fetchSendMessage, loading } =
+    useChatStore((state) => ({
       messages: state.messages,
+      loading: state.loading,
       fetchAllMessages: state.fetchAllMessages,
       fetchSendMessage: state.fetchSendMessage,
-    })
-  );
+    }));
   const senderId = Cookies.get("id");
   const [chatMessages, setChatMessages] = useState<MessageType[]>(
     messages ? messages : []
@@ -57,8 +58,15 @@ const Chat = ({ sender, receiver, onClose }: ChatProps) => {
 
   return (
     <div className="h-[50vh] grid grid-rows-12 w-[40vh] border border-gray-200 gap-4 bg-white fixed bottom-0 right-20">
-      <ChatHeader onClose={onClose} name={receiver.fullName} />
+      <ChatHeader
+        onClose={() => {
+          onClose();
+          setChatMessages([]);
+        }}
+        name={receiver.fullName}
+      />
       <div className="row-span-9 p-2 flex flex-col gap-1 overflow-y-scroll">
+        {loading ?? <Spinner />}
         {chatMessages.map((message) => (
           <Message
             key={message.id}
@@ -66,6 +74,7 @@ const Chat = ({ sender, receiver, onClose }: ChatProps) => {
             sender={
               (senderId ? senderId : "") === message.sender_id ? true : false
             }
+            read={message.read_timestamp ? true : false}
           />
         ))}
         <div ref={endOfMessagesRef} />

@@ -37,6 +37,7 @@ const ParticipantList = () => {
   if (!users) {
     return <Spinner />;
   }
+  // console.log(users);
   return (
     <div className="w-full overflow-y-scroll h-[calc(100vh-143px)] flex flex-col relative bg-gray-100 border-gray-200s">
       <Filter users={users} fetchFilteredUsers={fetchFilteredUsers} />
