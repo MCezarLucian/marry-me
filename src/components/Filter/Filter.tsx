@@ -22,9 +22,11 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
-    setRange(values);
     setSliderChanged(true);
+    const [min, max] = values;
+    setRange([min, max]);
     setSelectedAgeRanges([]);
+    setSelectedAgeRanges([`${min} > ${max}`]);
   };
 
   const handleAgeRangeChange = (range: string) => {
@@ -32,9 +34,9 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       ? selectedAgeRanges.filter((r) => r !== range)
       : [...selectedAgeRanges, range];
 
-    setSelectedAgeRanges(newSelectedRanges);
     setSliderChanged(false);
     setRange([18, 110]);
+    setSelectedAgeRanges(newSelectedRanges);
 
     if (newSelectedRanges.length === 1) {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
@@ -76,37 +78,29 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     const values: string[] = [];
 
     if (name) {
-      console.log("Filtering by name:", name);
       categories.push("full_name");
       values.push(name);
     }
 
     if (attributes) {
-      console.log("Filtering by attributes:", attributes);
       categories.push("attributes");
       values.push(attributes);
     }
 
     if (selectedGenders.length > 0) {
-      console.log("Filtering by gender:", selectedGenders);
       categories.push("gender");
       values.push(selectedGenders.toString());
     }
 
     if (selectedAgeRanges.length > 0) {
-      console.log("Filtering by age range:", selectedAgeRanges);
       categories.push("age");
       values.push(selectedAgeRanges.join(","));
     } else if (sliderChanged) {
-      console.log("Filtering by age slider:", range);
-      categories.push("minAge");
-      values.push(range[0].toString());
-      categories.push("maxAge");
-      values.push(range[1].toString());
+      categories.push("age");
+      values.push(`${range[0]} > ${range[1]}`);
     }
 
     if (admin && selectedTypes.length > 0) {
-      console.log("Filtering by type:", selectedTypes);
       categories.push("type");
       values.push(selectedTypes.join(","));
     }
@@ -146,7 +140,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="m"
+              value="male"
               checked={selectedGenders.includes("m")}
               onChange={() => handleGenderChange("m")}
               className="mr-2 border-darkGray p-6 w-4 h-4"
@@ -156,7 +150,7 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           <label className="mr-2 mb-5 text-base flex flex-row items-center cursor-pointer">
             <input
               type="checkbox"
-              value="f"
+              value="female"
               checked={selectedGenders.includes("f")}
               onChange={() => handleGenderChange("f")}
               className="mr-2 w-4 h-4"
