@@ -18,19 +18,15 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
   const [sliderChanged, setSliderChanged] = useState<boolean>(false);
   const [resetSlider, setResetSlider] = useState<boolean>(false);
 
-  const ageRanges = [
-    ["18", "25"],
-    ["25", "30"],
-    ["30", "40"],
-    ["40", "50"],
-    ["50", "70"],
-  ];
+  const ageRanges = ["18 > 25", "25 > 30", "30 > 40", "40 > 50", "50 > 70"];
   const userTypes = ["Contestant", "Regular"];
 
   const handleSliderChange = (values: [number, number]) => {
     setSliderChanged(true);
-    setRange(values);
-    setSelectedAgeRanges([`${values[0]} > ${values[1]}`]);
+    const [min, max] = values;
+    setRange([min, max]);
+    setSelectedAgeRanges([]);
+    setSelectedAgeRanges([`${min} > ${max}`]);
   };
 
   const handleAgeRangeChange = (range: string) => {
@@ -38,23 +34,25 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
       ? selectedAgeRanges.filter((r) => r !== range)
       : [...selectedAgeRanges, range];
 
+    setSliderChanged(false);
+    setRange([18, 110]);
     setSelectedAgeRanges(newSelectedRanges);
 
-    if (newSelectedRanges.length > 0) {
+    if (newSelectedRanges.length === 1) {
       const [min, max] = newSelectedRanges[0].split(" > ").map(Number);
       setRange([min, max]);
       setSliderChanged(false);
-      setResetSlider(false);
+      setResetSlider(true);
     } else {
       setRange([18, 110]);
-      setSliderChanged(true);
+      setSliderChanged(false);
     }
   };
-  /* 
+
   const resetSliderRange = () => {
     setResetSlider(false);
   };
- */
+
   const handleGenderChange = (gender: string) => {
     setSelectedGenders((prev) =>
       prev.includes(gender)
@@ -85,26 +83,35 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
     }
 
     if (attributes) {
-      categories.push("personal_attributes");
-      values.push(attributes);
+      console.log("Filtering by attributes:", attributes);
+      const personalAttributes = attributes.split(",");
+      personalAttributes.forEach((attribute) => {
+        categories.push("personal_attributes[]");
+        values.push(attribute);
+      });
     }
 
     if (selectedGenders.length > 0) {
       categories.push("gender");
-      values.push(selectedGenders.join(","));
+      values.push(selectedGenders.toString());
     }
 
     if (selectedAgeRanges.length > 0) {
-      const [min, max] = selectedAgeRanges[0].split(" > ");
-      categories.push("age_from[]");
-      values.push(`${values[0]}`);
-      categories.push("age_to[]");
-      values.push(`${values[1]}`);
+      console.log(selectedAgeRanges);
+      console.log("Filtering by age range:", selectedAgeRanges);
+      selectedAgeRanges.forEach((element) => {
+        const [age_from, age_to] = element.split(" > ");
+        categories.push("age_from[]");
+        categories.push("age_to[]");
+        values.push(age_from);
+        values.push(age_to);
+      });
     } else if (sliderChanged) {
+      console.log("Filtering by age slider:", range);
       categories.push("age_from[]");
-      values.push(`${range[0]}`);
+      values.push(range[0].toString());
       categories.push("age_to[]");
-      values.push(`${range[1]}`);
+      values.push(range[1].toString());
     }
 
     if (admin && selectedTypes.length > 0) {
@@ -171,21 +178,22 @@ const Filter = ({ users, admin, fetchFilteredUsers }: FilterProps) => {
           Age
         </label>
         <div className="flex flex-col">
-          {/* {ageRanges.map((range) => (
+          {ageRanges.map((range) => (
             <label
               key={range}
               className="mr-2 mb-5 text-base flex flex-row items-center cursor-pointer"
             >
               <input
                 type="checkbox"
-                value={range.join(" > ")}
+                value={range}
                 checked={selectedAgeRanges.includes(range)}
                 onChange={() => handleAgeRangeChange(range)}
+                onClick={resetSliderRange}
                 className="mr-2 w-4 h-4"
               />
-              {range.join(" > ")}
+              {range}
             </label>
-          ))} */}
+          ))}
 
           <DoubleIntervalSlider
             min={18}

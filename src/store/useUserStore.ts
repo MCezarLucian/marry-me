@@ -40,6 +40,7 @@ const useUserStore = create<UserStoreType>((set) => ({
       const { data, status } = response.data;
       set({ users: data, loading: false, status: status });
     } catch (error: any) {
+      console.log(error.response);
       set({
         error: error instanceof Error ? error.message : "An error occurred",
         loading: false,
@@ -135,7 +136,7 @@ const useUserStore = create<UserStoreType>((set) => ({
   fetchDeleteUser: async (id: string) => {
     set({ loading: true, error: null });
     try {
-      const response = await axios.delete(`${BACKEND_API_URL}/user/${id}`, {
+      await axios.delete(`${BACKEND_API_URL}/user/${id}`, {
         headers: {
           "x-token": `${Cookies.get("sessionToken")}`,
         },
