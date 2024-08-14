@@ -17,10 +17,13 @@ const Card = ({ user, onClick }: CardProps) => {
     setRating(user.rating);
   }, [user]);
 
-  if (user === null) {
+  if (!user) {
     return <></>;
   }
-  const [firstName, lastName] = user.fullName.split(" ");
+  // console.log(user);
+
+  const fullName = user.fullName || "";
+  const [firstName, lastName] = fullName.split(" ");
   return (
     <div className="flex flex-col relative">
       <Link
